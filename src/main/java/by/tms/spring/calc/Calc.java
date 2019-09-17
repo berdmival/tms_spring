@@ -1,12 +1,12 @@
-package by.tms.spring;
+package by.tms.spring.calc;
 
 import by.tms.spring.action.ActionType;
 import by.tms.spring.util.Validator;
 
 public class Calc {
-    Double num1;
-    Double num2;
-    ActionType actionType;
+    private Double num1;
+    private Double num2;
+    private ActionType actionType;
 
     public void setNum1(Double num1) {
         this.num1 = num1;

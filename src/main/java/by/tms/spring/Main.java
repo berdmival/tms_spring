@@ -1,5 +1,6 @@
 package by.tms.spring;
 
+import by.tms.spring.calc.Calc;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
