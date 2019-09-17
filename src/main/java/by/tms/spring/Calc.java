@@ -62,7 +62,6 @@ public class Calc {
         return num1 * num2;
     }
 
-    // TODO: division by zero check
     private Double div(Double num1, Double num2) {
         return num1 / num2;
     }
