@@ -2,21 +2,19 @@ package by.tms.spring.calc;
 
 import by.tms.spring.action.ActionType;
 import by.tms.spring.util.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Calc {
     private Double num1;
     private Double num2;
     private ActionType actionType;
 
-    public void setNum1(Double num1) {
+    @Autowired
+    public Calc(Double num1, Double num2, ActionType actionType) {
         this.num1 = num1;
-    }
-
-    public void setNum2(Double num2) {
         this.num2 = num2;
-    }
-
-    public void setActionType(ActionType actionType) {
         this.actionType = actionType;
     }
 
