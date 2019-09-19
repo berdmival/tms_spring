@@ -14,7 +14,7 @@ public class Calc {
     private ActionType actionType;
 
     @Autowired
-    public Calc(@Qualifier("num1") Double num1, @Qualifier("num2") Double num2, @Value("SUM") ActionType actionType) {
+    public Calc(@Qualifier("num1") Double num1, @Qualifier("num2") Double num2, @Qualifier("action") ActionType actionType) {
         this.num1 = num1;
         this.num2 = num2;
         this.actionType = actionType;
@@ -36,7 +36,7 @@ public class Calc {
                 break;
 
             case DIV:
-                if (Validator.isValid(this.num1, this.num2, this.actionType)) {
+                if (Validator.isValidExpression(this.num1, this.num2, this.actionType)) {
                     result = div(this.num1, this.num2);
                 } else {
                     result = null;
