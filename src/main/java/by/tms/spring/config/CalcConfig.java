@@ -10,11 +10,10 @@ import java.util.Scanner;
 @Configuration
 public class CalcConfig {
 
-    @Bean("num1")
-    public Double getNum1() {
+    private Double getNum(String msg) {
         Double result;
         Scanner in = new Scanner(System.in);
-        System.out.print("Input a number 1: ");
+        System.out.print(msg);
         String inputData = in.nextLine();
         System.out.println();
         if (Validator.isNumeric(inputData)) {
@@ -22,35 +21,28 @@ public class CalcConfig {
             result = Double.parseDouble(inputData);
         } else {
             System.out.println("Please, enter a number");
-            result = getNum1();
+            result = getNum(msg);
         }
         return result;
     }
 
+    @Bean("num1")
+    public Double getNum1() {
+        return getNum("Input a number 1: ");
+    }
+
     @Bean("num2")
     public Double getNum2() {
-        Double result;
-        Scanner in = new Scanner(System.in);
-        System.out.print("Input a number 2: ");
-        String inputData = in.nextLine();
-        System.out.println();
-        if (Validator.isNumeric(inputData)) {
-            inputData = inputData.replaceAll(",", ".");
-            result = Double.parseDouble(inputData);
-        } else {
-            System.out.println("Please, enter a number");
-            result = getNum2();
-        }
-        return result;
+        return getNum("Input a number 2: ");
     }
 
     @Bean("action")
     public ActionType getAction() {
         Scanner in = new Scanner(System.in);
         System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
-        ActionType num = ActionType.valueOf(in.next().toUpperCase());
+        ActionType action = ActionType.valueOf(in.next().toUpperCase());
         System.out.println();
-        return num;
+        return action;
     }
 
 }
