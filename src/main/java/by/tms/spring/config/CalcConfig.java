@@ -39,10 +39,10 @@ public class CalcConfig {
     public ActionTypeEnum getAction() {
         ActionTypeEnum action;
         String input;
-        try (Scanner in = new Scanner(System.in)) {
-            System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
-            input = in.next().toUpperCase();
-        }
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
+        input = in.next().toUpperCase();
+
         if (Validator.isValidAction(input)) {
             action = ActionTypeEnum.valueOf(input);
         } else {

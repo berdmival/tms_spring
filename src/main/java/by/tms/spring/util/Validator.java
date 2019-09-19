@@ -13,12 +13,11 @@ public class Validator {
         return false;
     }
 
-    public static boolean isValidExpression(Double num1, Double num2, ActionTypeEnum actionType) {
-        boolean isValid = true;
-        if (actionType.equals(ActionTypeEnum.DIV) & num2 == 0) {
-            isValid = false;
+    public static boolean isValidExpression(Double num1, Double num2, ActionTypeEnum actionTypeEnum) {
+        if (actionTypeEnum.equals(ActionTypeEnum.DIV) & num2 == 0) {
+            return false;
         }
-        return isValid;
+        return true;
     }
 
     public static boolean isNumeric(String str) {
