@@ -2,7 +2,14 @@ package by.tms.spring.util;
 
 import by.tms.spring.action.ActionType;
 
+import java.util.Arrays;
+
 public class Validator {
+
+    public static boolean isValidAction(String input) {
+        return Arrays.asList(ActionType.values()).stream().anyMatch(actionType -> actionType.toString().equals(input));
+    }
+
     public static boolean isValidExpression(Double num1, Double num2, ActionType actionType) {
         boolean isValid = true;
         if (actionType.equals(ActionType.DIV) & num2 == 0) {
