@@ -1,19 +1,19 @@
 package by.tms.spring.calc;
 
-import by.tms.spring.action.ActionType;
+import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.util.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("calc")
-public class Calc {
+public class CalcService {
     private Double num1;
     private Double num2;
-    private ActionType actionType;
+    private ActionTypeEnum actionType;
 
     @Autowired
-    public Calc(@Qualifier("num1") Double num1, @Qualifier("num2") Double num2, @Qualifier("action") ActionType actionType) {
+    public CalcService(@Qualifier("num1") Double num1, @Qualifier("num2") Double num2, @Qualifier("action") ActionTypeEnum actionType) {
         this.num1 = num1;
         this.num2 = num2;
         this.actionType = actionType;

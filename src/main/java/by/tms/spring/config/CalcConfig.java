@@ -1,6 +1,6 @@
 package by.tms.spring.config;
 
-import by.tms.spring.action.ActionType;
+import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.util.Validator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,15 +36,15 @@ public class CalcConfig {
     }
 
     @Bean("action")
-    public ActionType getAction() {
-        ActionType action;
+    public ActionTypeEnum getAction() {
+        ActionTypeEnum action;
         String input;
         try (Scanner in = new Scanner(System.in)) {
             System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
             input = in.next().toUpperCase();
         }
         if (Validator.isValidAction(input)) {
-            action = ActionType.valueOf(input);
+            action = ActionTypeEnum.valueOf(input);
         } else {
             System.out.println("Please, input correct action (SUM, DIFF, MULT or DIV)!");
             action = getAction();

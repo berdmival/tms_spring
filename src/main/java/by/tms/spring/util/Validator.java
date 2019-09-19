@@ -1,11 +1,11 @@
 package by.tms.spring.util;
 
-import by.tms.spring.action.ActionType;
+import by.tms.spring.action.ActionTypeEnum;
 
 public class Validator {
 
     public static boolean isValidAction(String input) {
-        for (ActionType actionType : ActionType.values()) {
+        for (ActionTypeEnum actionType : ActionTypeEnum.values()) {
             if (actionType.toString().equals(input)) {
                 return true;
             }
@@ -13,9 +13,9 @@ public class Validator {
         return false;
     }
 
-    public static boolean isValidExpression(Double num1, Double num2, ActionType actionType) {
+    public static boolean isValidExpression(Double num1, Double num2, ActionTypeEnum actionType) {
         boolean isValid = true;
-        if (actionType.equals(ActionType.DIV) & num2 == 0) {
+        if (actionType.equals(ActionTypeEnum.DIV) & num2 == 0) {
             isValid = false;
         }
         return isValid;

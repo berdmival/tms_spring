@@ -1,6 +1,6 @@
 package by.tms.spring.action;
 
-public enum ActionType {
+public enum ActionTypeEnum {
     SUM,
     DIFF,
     MULT,
