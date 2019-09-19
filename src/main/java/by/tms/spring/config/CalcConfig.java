@@ -1,8 +1,5 @@
-package by.tms.spring;
+package by.tms.spring.config;
 
-import by.tms.spring.action.ActionType;
-import by.tms.spring.calc.Calc;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,8 +16,4 @@ public class CalcConfig {
         return Double.parseDouble("17.8");
     }
 
-    @Bean("calc")
-    public Calc getCalc(Double num1, Double num2, @Value("SUM") ActionType actionType) {
-        return new Calc(num1, num2, actionType);
-    }
 }

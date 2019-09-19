@@ -3,16 +3,18 @@ package by.tms.spring.calc;
 import by.tms.spring.action.ActionType;
 import by.tms.spring.util.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("calc")
 public class Calc {
     private Double num1;
     private Double num2;
     private ActionType actionType;
 
     @Autowired
-    public Calc(Double num1, Double num2, ActionType actionType) {
+    public Calc(@Qualifier("num1") Double num1, @Qualifier("num2") Double num2, @Value("SUM") ActionType actionType) {
         this.num1 = num1;
         this.num2 = num2;
         this.actionType = actionType;

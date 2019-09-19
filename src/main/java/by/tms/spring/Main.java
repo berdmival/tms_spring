@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(CalcConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         Calc calc = context.getBean("calc", Calc.class);
         System.out.println(calc.calculate());
     }
