@@ -1,41 +1,16 @@
 package by.tms.spring.config;
 
-import by.tms.spring.action.ActionTypeEnum;
-import by.tms.spring.util.Getter;
-import by.tms.spring.util.Validator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class CalcConfig {
 
-    @Bean("num1")
-    public Double getNum1() {
-        return Getter.getNum("Input a number 1: ");
+    @Bean("history")
+    public List HistoryList() {
+        return new ArrayList<>();
     }
-
-    @Bean("num2")
-    public Double getNum2() {
-        return Getter.getNum("Input a number 2: ");
-    }
-
-    @Bean("action")
-    public ActionTypeEnum getAction() {
-        ActionTypeEnum action;
-        String input;
-        Scanner in = new Scanner(System.in);
-        System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
-        input = in.next().toUpperCase();
-
-        if (Validator.isValidAction(input)) {
-            action = ActionTypeEnum.valueOf(input);
-        } else {
-            System.out.println("Please, input correct action (SUM, DIFF, MULT or DIV)!");
-            action = getAction();
-        }
-        return action;
-    }
-
 }
