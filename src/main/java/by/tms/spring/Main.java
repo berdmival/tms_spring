@@ -21,35 +21,22 @@ public class Main {
         while (true) {
             String inputData;
             StringBuilder historyItemBuilder = new StringBuilder();
+
             System.out.print("If you want to exit type 'q', else type 'y'");
             inputData = in.nextLine();
             if (inputData.equals("q")) {
                 break;
             }
 
-            do {
-                System.out.print("Input a number 1: ");
-                inputData = in.nextLine();
-            }
-            while (!Validator.isNumeric(inputData));
-            inputData = inputData.replaceAll(",", ".");
+            inputData = getNumberFromConsole(in, "Input a number 1: ");
             historyItemBuilder.append("Num1: ").append(inputData);
             calcService.setNum1(Double.parseDouble(inputData));
 
-            do {
-                System.out.print("Input a number 2: ");
-                inputData = in.nextLine();
-            }
-            while (!Validator.isNumeric(inputData));
-            inputData = inputData.replaceAll(",", ".");
+            inputData = getNumberFromConsole(in, "Input a number 2: ");
             historyItemBuilder.append(", num2: ").append(inputData);
             calcService.setNum2(Double.parseDouble(inputData));
 
-            do {
-                System.out.print("Input action (SUM, DIFF, MULT or DIV): ");
-                inputData = in.nextLine().toUpperCase();
-            }
-            while (!Validator.isValidAction(inputData));
+            inputData = getActionFromConsole(in, "Input action (SUM, DIFF, MULT or DIV): ");
             historyItemBuilder.append(", action: ").append(inputData);
             calcService.setActionType(ActionTypeEnum.valueOf(inputData));
 
@@ -57,11 +44,6 @@ public class Main {
             historyItemBuilder.append(", result: ").append(calcService.calculate());
             history.add(historyItemBuilder.toString());
 
-            System.out.print("If you want to exit type 'q', else type 'y'");
-            inputData = in.nextLine();
-            if (inputData.equals("q")) {
-                break;
-            }
         }
         in.close();
 
@@ -71,5 +53,26 @@ public class Main {
                 System.out.println(historyItem);
             }
         }
+    }
+
+    private static String getActionFromConsole(Scanner in, String s) {
+        String inputData;
+        do {
+            System.out.print(s);
+            inputData = in.nextLine().toUpperCase();
+        }
+        while (!Validator.isValidAction(inputData));
+        return inputData;
+    }
+
+    private static String getNumberFromConsole(Scanner in, String s) {
+        String inputData;
+        do {
+            System.out.print(s);
+            inputData = in.nextLine();
+        }
+        while (!Validator.isNumeric(inputData));
+        inputData = inputData.replaceAll(",", ".");
+        return inputData;
     }
 }
