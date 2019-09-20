@@ -4,6 +4,8 @@ import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.util.Validator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("calc")
 public class CalcService {
     private Double num1;
@@ -22,8 +24,12 @@ public class CalcService {
         this.actionType = actionType;
     }
 
-    public Double calculate() {
-        Double result;
+    public void addCalculationToHistory (List history, Object historyItem) {
+        history.add(historyItem);
+    }
+
+    public Number calculate() {
+        Number result;
         switch (actionType) {
             case SUM:
                 result = sum(this.num1, this.num2);
@@ -52,19 +58,19 @@ public class CalcService {
         return result;
     }
 
-    private Double sum(Double num1, Double num2) {
+    private Number sum(Double num1, Double num2) {
         return num1 + num2;
     }
 
-    private Double diff(Double num1, Double num2) {
+    private Number diff(Double num1, Double num2) {
         return num1 - num2;
     }
 
-    private Double mult(Double num1, Double num2) {
+    private Number mult(Double num1, Double num2) {
         return num1 * num2;
     }
 
-    private Double div(Double num1, Double num2) {
+    private Number div(Double num1, Double num2) {
         return num1 / num2;
     }
 }

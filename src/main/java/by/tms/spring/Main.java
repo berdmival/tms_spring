@@ -42,8 +42,8 @@ public class Main {
 
             System.out.println("Result is: " + calcService.calculate());
             historyItemBuilder.append(", result: ").append(calcService.calculate());
-            history.add(historyItemBuilder.toString());
 
+            calcService.addCalculationToHistory(history, historyItemBuilder.toString());
         }
         in.close();
 
