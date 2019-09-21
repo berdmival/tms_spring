@@ -2,6 +2,7 @@ package by.tms.spring;
 
 import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.service.CalcService;
+import by.tms.spring.service.DAOService;
 import by.tms.spring.util.Validator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         CalcService calcService = context.getBean("calc", CalcService.class);
-        List history = context.getBean("history", List.class);
+        DAOService DAO = context.getBean("dao", DAOService.class);
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -30,13 +31,14 @@ public class Main {
 
             getCalcServiceAttributesFromConsole(calcService, in, historyItemBuilder);
 
-            calcService.addCalculationToHistory(history, historyItemBuilder.toString());
+            DAO.addToHistory(historyItemBuilder.toString());
 
             System.out.println("Result is: " + calcService.calculate());
         }
 
         in.close();
 
+        List history = DAO.getHistory();
         System.out.println("History of calculating: ");
         if (history.size() > 0) {
             for (Object historyItem : history) {

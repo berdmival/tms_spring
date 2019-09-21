@@ -24,10 +24,6 @@ public class CalcService {
         this.actionType = actionType;
     }
 
-    public void addCalculationToHistory (List history, Object historyItem) {
-        history.add(historyItem);
-    }
-
     public Number calculate() {
         Number result;
         switch (actionType) {
