@@ -13,9 +13,9 @@ import java.util.Scanner;
 @ComponentScan
 public class Main {
 
-    public static final String INPUT_A_NUMBER_1_MSG = "Input a number 1: ";
-    public static final String INPUT_A_NUMBER_2_MSG = "Input a number 2: ";
-    public static final String INPUT_ACTION_MSG = "Input action (SUM, DIFF, MULT or DIV): ";
+    private static final String INPUT_A_NUMBER_1_MSG = "Input a number 1: ";
+    private static final String INPUT_A_NUMBER_2_MSG = "Input a number 2: ";
+    private static final String INPUT_ACTION_MSG = "Input action (SUM, DIFF, MULT or DIV): ";
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
@@ -49,10 +49,7 @@ public class Main {
         String inputData;
         System.out.print("If you want to exit type 'q', else type 'y'");
         inputData = in.nextLine();
-        if (inputData.equals("q")) {
-            return true;
-        }
-        return false;
+        return inputData.equals("q");
     }
 
     private static void getCalcServiceAttributesFromConsole(CalcService calcService, Scanner in, StringBuilder historyItemBuilder) {
@@ -65,17 +62,17 @@ public class Main {
         historyItemBuilder.append(", num2: ").append(inputData);
         calcService.setNum2(Double.parseDouble(inputData));
 
-        inputData = getActionFromConsole(in, INPUT_ACTION_MSG);
+        inputData = getActionFromConsole(in);
         historyItemBuilder.append(", action: ").append(inputData);
         calcService.setActionType(ActionTypeEnum.valueOf(inputData));
 
         historyItemBuilder.append(", result: ").append(calcService.calculate());
     }
 
-    private static String getActionFromConsole(Scanner in, String s) {
+    private static String getActionFromConsole(Scanner in) {
         String inputData;
         do {
-            System.out.print(s);
+            System.out.print(Main.INPUT_ACTION_MSG);
             inputData = in.nextLine().toUpperCase();
         }
         while (!Validator.isValidAction(inputData));

@@ -44,7 +44,7 @@ public class CalcService {
                 break;
 
             case DIV:
-                if (Validator.isValidExpression(this.num1, this.num2, this.actionType)) {
+                if (Validator.isValidDIV(this.num2, this.actionType)) {
                     result = div(this.num1, this.num2);
                 } else {
                     result = null;
