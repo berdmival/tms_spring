@@ -10,8 +10,13 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.List;
 import java.util.Scanner;
 
-@ComponentScan("by.tms.spring")
+@ComponentScan
 public class Main {
+
+    public static final String INPUT_A_NUMBER_1_MSG = "Input a number 1: ";
+    public static final String INPUT_A_NUMBER_2_MSG = "Input a number 2: ";
+    public static final String INPUT_ACTION_MSG = "Input action (SUM, DIFF, MULT or DIV): ";
+
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         CalcService calcService = context.getBean("calc", CalcService.class);
@@ -19,32 +24,17 @@ public class Main {
         Scanner in = new Scanner(System.in);
 
         while (true) {
-            String inputData;
             StringBuilder historyItemBuilder = new StringBuilder();
 
-            System.out.print("If you want to exit type 'q', else type 'y'");
-            inputData = in.nextLine();
-            if (inputData.equals("q")) {
-                break;
-            }
+            if (exitOrContinue(in)) break;
 
-            inputData = getNumberFromConsole(in, "Input a number 1: ");
-            historyItemBuilder.append("Num1: ").append(inputData);
-            calcService.setNum1(Double.parseDouble(inputData));
-
-            inputData = getNumberFromConsole(in, "Input a number 2: ");
-            historyItemBuilder.append(", num2: ").append(inputData);
-            calcService.setNum2(Double.parseDouble(inputData));
-
-            inputData = getActionFromConsole(in, "Input action (SUM, DIFF, MULT or DIV): ");
-            historyItemBuilder.append(", action: ").append(inputData);
-            calcService.setActionType(ActionTypeEnum.valueOf(inputData));
-
-            System.out.println("Result is: " + calcService.calculate());
-            historyItemBuilder.append(", result: ").append(calcService.calculate());
+            getCalcServiceAttributesFromConsole(calcService, in, historyItemBuilder);
 
             calcService.addCalculationToHistory(history, historyItemBuilder.toString());
+
+            System.out.println("Result is: " + calcService.calculate());
         }
+
         in.close();
 
         System.out.println("History of calculating: ");
@@ -53,6 +43,33 @@ public class Main {
                 System.out.println(historyItem);
             }
         }
+    }
+
+    private static boolean exitOrContinue(Scanner in) {
+        String inputData;
+        System.out.print("If you want to exit type 'q', else type 'y'");
+        inputData = in.nextLine();
+        if (inputData.equals("q")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void getCalcServiceAttributesFromConsole(CalcService calcService, Scanner in, StringBuilder historyItemBuilder) {
+        String inputData;
+        inputData = getNumberFromConsole(in, INPUT_A_NUMBER_1_MSG);
+        historyItemBuilder.append("Num1: ").append(inputData);
+        calcService.setNum1(Double.parseDouble(inputData));
+
+        inputData = getNumberFromConsole(in, INPUT_A_NUMBER_2_MSG);
+        historyItemBuilder.append(", num2: ").append(inputData);
+        calcService.setNum2(Double.parseDouble(inputData));
+
+        inputData = getActionFromConsole(in, INPUT_ACTION_MSG);
+        historyItemBuilder.append(", action: ").append(inputData);
+        calcService.setActionType(ActionTypeEnum.valueOf(inputData));
+
+        historyItemBuilder.append(", result: ").append(calcService.calculate());
     }
 
     private static String getActionFromConsole(Scanner in, String s) {
