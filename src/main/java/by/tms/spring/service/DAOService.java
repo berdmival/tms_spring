@@ -21,4 +21,5 @@ public class DAOService {
 
     public void addToHistory (Object historyItem) {
         history.add(historyItem);
-    }}
+    }
+}

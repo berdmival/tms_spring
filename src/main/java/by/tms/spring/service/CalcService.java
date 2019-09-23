@@ -4,8 +4,6 @@ import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.util.Validator;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service("calc")
 public class CalcService {
     private Double num1;
