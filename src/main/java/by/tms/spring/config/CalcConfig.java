@@ -1,6 +1,6 @@
 package by.tms.spring.config;
 
-import by.tms.spring.expression.CalcExpression;
+import by.tms.spring.expression.Expression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class CalcConfig {
 
     @Bean("history")
-    public List<CalcExpression> HistoryList() {
+    public List<Expression> HistoryList() {
         return new ArrayList<>();
     }
 }

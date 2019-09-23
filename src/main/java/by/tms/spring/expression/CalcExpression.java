@@ -23,29 +23,48 @@ public class CalcExpression implements Expression{
         this.calcDateTime = LocalDateTime.now();
     }
 
-    @Override
     public void setNum1(Number num1) {
         this.num1 = num1;
     }
 
-    @Override
     public void setNum2(Number num2) {
         this.num2 = num2;
     }
 
-    @Override
     public void setActionType(ActionTypeEnum actionType) {
         this.actionType = actionType;
     }
 
-    @Override
     public void setResult(Number result) {
         this.result = result;
     }
 
-    @Override
     public void setDateTimeHistoryPattern(String dateTimeHistoryPattern) {
         this.dateTimeHistoryPattern = dateTimeHistoryPattern;
+    }
+
+    public Number getNum1() {
+        return num1;
+    }
+
+    public Number getNum2() {
+        return num2;
+    }
+
+    public ActionTypeEnum getActionType() {
+        return actionType;
+    }
+
+    public Number getResult() {
+        return result;
+    }
+
+    public LocalDateTime getCalcDateTime() {
+        return calcDateTime;
+    }
+
+    public String getDateTimeHistoryPattern() {
+        return dateTimeHistoryPattern;
     }
 
     @Override
