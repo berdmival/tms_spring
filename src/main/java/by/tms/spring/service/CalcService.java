@@ -22,6 +22,18 @@ public class CalcService {
         this.actionType = actionType;
     }
 
+    public Double getNum1() {
+        return num1;
+    }
+
+    public Double getNum2() {
+        return num2;
+    }
+
+    public ActionTypeEnum getActionType() {
+        return actionType;
+    }
+
     public Number calculate() {
         Number result;
         switch (actionType) {

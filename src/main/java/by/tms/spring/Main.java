@@ -1,6 +1,7 @@
 package by.tms.spring;
 
 import by.tms.spring.action.ActionTypeEnum;
+import by.tms.spring.expression.CalcExpression;
 import by.tms.spring.service.CalcService;
 import by.tms.spring.service.DAOService;
 import by.tms.spring.util.Validator;
@@ -17,6 +18,10 @@ public class Main {
     private static final String INPUT_A_NUMBER_1_MSG = "Input a number 1: ";
     private static final String INPUT_A_NUMBER_2_MSG = "Input a number 2: ";
     private static final String INPUT_ACTION_MSG = "Input action (SUM, DIFF, MULT or DIV): ";
+    private static final String DATE_TIME_HISTORY_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String RESULT_IS_MSG = "Result is: ";
+    private static final String HISTORY_OF_CALCULATING_MSG = "History of calculating: ";
+    private static final String EXIT_MSG = "If you want to exit type 'q', else press ENTER";
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
@@ -24,22 +29,18 @@ public class Main {
         DAOService DAO = context.getBean("dao", DAOService.class);
         Scanner in = new Scanner(System.in);
 
-        while (true) {
-            StringBuilder historyItemBuilder = new StringBuilder();
+        while (!exitCalc(in)) {
+            getCalcServiceAttributesFromConsole(calcService, in);
 
-            if (exitOrContinue(in)) break;
+            addExpressionToHistory(context, calcService, DAO);
 
-            getCalcServiceAttributesFromConsole(calcService, in, historyItemBuilder);
-
-            DAO.addToHistory(historyItemBuilder.toString());
-
-            System.out.println("Result is: " + calcService.calculate());
+            System.out.println(RESULT_IS_MSG + calcService.calculate());
         }
 
         in.close();
 
         List history = DAO.getHistory();
-        System.out.println("History of calculating: ");
+        System.out.println(HISTORY_OF_CALCULATING_MSG);
         if (history.size() > 0) {
             for (Object historyItem : history) {
                 System.out.println(historyItem);
@@ -47,28 +48,33 @@ public class Main {
         }
     }
 
-    private static boolean exitOrContinue(Scanner in) {
+    private static void addExpressionToHistory(ApplicationContext context, CalcService calcService, DAOService DAO) {
+        CalcExpression historyItem = context.getBean("historyItem", CalcExpression.class);
+        historyItem.setNum1(calcService.getNum1());
+        historyItem.setNum2(calcService.getNum2());
+        historyItem.setActionType(calcService.getActionType());
+        historyItem.setResult(calcService.calculate());
+        historyItem.setDateTimeHistoryPattern(DATE_TIME_HISTORY_PATTERN);
+        DAO.addToHistory(historyItem);
+    }
+
+    private static boolean exitCalc(Scanner in) {
         String inputData;
-        System.out.print("If you want to exit type 'q', else type 'y'");
+        System.out.print(EXIT_MSG);
         inputData = in.nextLine();
         return inputData.equals("q");
     }
 
-    private static void getCalcServiceAttributesFromConsole(CalcService calcService, Scanner in, StringBuilder historyItemBuilder) {
+    private static void getCalcServiceAttributesFromConsole(CalcService calcService, Scanner in) {
         String inputData;
         inputData = getNumberFromConsole(in, INPUT_A_NUMBER_1_MSG);
-        historyItemBuilder.append("Num1: ").append(inputData);
         calcService.setNum1(Double.parseDouble(inputData));
 
         inputData = getNumberFromConsole(in, INPUT_A_NUMBER_2_MSG);
-        historyItemBuilder.append(", num2: ").append(inputData);
         calcService.setNum2(Double.parseDouble(inputData));
 
         inputData = getActionFromConsole(in);
-        historyItemBuilder.append(", action: ").append(inputData);
         calcService.setActionType(ActionTypeEnum.valueOf(inputData));
-
-        historyItemBuilder.append(", result: ").append(calcService.calculate());
     }
 
     private static String getActionFromConsole(Scanner in) {
