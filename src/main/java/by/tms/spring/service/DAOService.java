@@ -20,7 +20,7 @@ public class DAOService {
         this.history = history;
     }
 
-    public void addToHistory (Expression historyItem) {
+    public void addToHistory(Expression historyItem) {
         history.add(historyItem);
     }
 }

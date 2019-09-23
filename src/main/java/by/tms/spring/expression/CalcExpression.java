@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Component("historyItem")
 @Scope("prototype")
 @Lazy()
-public class CalcExpression implements Expression{
+public class CalcExpression implements Expression {
     private Number num1;
     private Number num2;
     private ActionTypeEnum actionType;
@@ -41,30 +41,6 @@ public class CalcExpression implements Expression{
 
     public void setDateTimeHistoryPattern(String dateTimeHistoryPattern) {
         this.dateTimeHistoryPattern = dateTimeHistoryPattern;
-    }
-
-    public Number getNum1() {
-        return num1;
-    }
-
-    public Number getNum2() {
-        return num2;
-    }
-
-    public ActionTypeEnum getActionType() {
-        return actionType;
-    }
-
-    public Number getResult() {
-        return result;
-    }
-
-    public LocalDateTime getCalcDateTime() {
-        return calcDateTime;
-    }
-
-    public String getDateTimeHistoryPattern() {
-        return dateTimeHistoryPattern;
     }
 
     @Override
