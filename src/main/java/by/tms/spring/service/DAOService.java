@@ -11,7 +11,7 @@ import java.util.List;
 public class DAOService {
     private List<Expression> history;
 
-    public List getHistory() {
+    public List<Expression> getHistory() {
         return history;
     }
 

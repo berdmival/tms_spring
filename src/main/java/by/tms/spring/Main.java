@@ -2,6 +2,7 @@ package by.tms.spring;
 
 import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.expression.CalcExpression;
+import by.tms.spring.expression.Expression;
 import by.tms.spring.service.CalcService;
 import by.tms.spring.service.DAOService;
 import by.tms.spring.util.Validator;
@@ -39,10 +40,10 @@ public class Main {
 
         in.close();
 
-        List history = DAO.getHistory();
+        List<Expression> history = DAO.getHistory();
         System.out.println(HISTORY_OF_CALCULATING_MSG);
         if (history.size() > 0) {
-            for (Object historyItem : history) {
+            for (Expression historyItem : history) {
                 System.out.println(historyItem);
             }
         }
