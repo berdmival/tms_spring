@@ -43,6 +43,26 @@ public class CalcExpression implements Expression {
         this.dateTimeHistoryPattern = dateTimeHistoryPattern;
     }
 
+    public Number getNum1() {
+        return num1;
+    }
+
+    public Number getNum2() {
+        return num2;
+    }
+
+    public ActionTypeEnum getActionType() {
+        return actionType;
+    }
+
+    public Number getResult() {
+        return result;
+    }
+
+    public LocalDateTime getCalcDateTime() {
+        return calcDateTime;
+    }
+
     @Override
     public String toString() {
         return "CalcExpression{" +

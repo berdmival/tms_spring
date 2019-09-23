@@ -28,18 +28,25 @@ public class Main {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         CalcService calcService = context.getBean("calc", CalcService.class);
         DAOService DAO = context.getBean("dao", DAOService.class);
-        Scanner in = new Scanner(System.in);
 
-        while (!exitCalc(in)) {
-            getCalcServiceAttributesFromConsole(calcService, in);
+        try (Scanner in = new Scanner(System.in)) {
+            while (!exitCalc(in)) {
+                CalcExpression expression = context.getBean("historyItem", CalcExpression.class);
 
-            addExpressionToHistory(context, calcService, DAO);
+                getExpressionAttributesFromConsole(expression, in);
 
-            System.out.println(RESULT_IS_MSG + calcService.calculate());
+                calcService.calculate(expression);
+
+                System.out.println(RESULT_IS_MSG + expression.getResult());
+
+                addExpressionToHistory(expression, DAO);
+            }
         }
 
-        in.close();
+        printHistory(DAO);
+    }
 
+    private static void printHistory(DAOService DAO) {
         List<Expression> history = DAO.getHistory();
         System.out.println(HISTORY_OF_CALCULATING_MSG);
         if (history.size() > 0) {
@@ -49,14 +56,9 @@ public class Main {
         }
     }
 
-    private static void addExpressionToHistory(ApplicationContext context, CalcService calcService, DAOService DAO) {
-        CalcExpression historyItem = context.getBean("historyItem", CalcExpression.class);
-        historyItem.setNum1(calcService.getNum1());
-        historyItem.setNum2(calcService.getNum2());
-        historyItem.setActionType(calcService.getActionType());
-        historyItem.setResult(calcService.calculate());
-        historyItem.setDateTimeHistoryPattern(DATE_TIME_HISTORY_PATTERN);
-        DAO.addToHistory(historyItem);
+    private static void addExpressionToHistory(CalcExpression expression, DAOService DAO) {
+        expression.setDateTimeHistoryPattern(DATE_TIME_HISTORY_PATTERN);
+        DAO.addToHistory(expression);
     }
 
     private static boolean exitCalc(Scanner in) {
@@ -66,16 +68,16 @@ public class Main {
         return inputData.equals("q");
     }
 
-    private static void getCalcServiceAttributesFromConsole(CalcService calcService, Scanner in) {
+    private static void getExpressionAttributesFromConsole(CalcExpression expression, Scanner in) {
         String inputData;
         inputData = getNumberFromConsole(in, INPUT_A_NUMBER_1_MSG);
-        calcService.setNum1(Double.parseDouble(inputData));
+        expression.setNum1(Double.parseDouble(inputData));
 
         inputData = getNumberFromConsole(in, INPUT_A_NUMBER_2_MSG);
-        calcService.setNum2(Double.parseDouble(inputData));
+        expression.setNum2(Double.parseDouble(inputData));
 
         inputData = getActionFromConsole(in);
-        calcService.setActionType(ActionTypeEnum.valueOf(inputData));
+        expression.setActionType(ActionTypeEnum.valueOf(inputData));
     }
 
     private static String getActionFromConsole(Scanner in) {

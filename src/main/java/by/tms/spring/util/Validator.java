@@ -13,8 +13,8 @@ public class Validator {
         return false;
     }
 
-    public static boolean isValidDIV(Double num2, ActionTypeEnum actionTypeEnum) {
-        return !(actionTypeEnum.equals(ActionTypeEnum.DIV) & num2 == 0);
+    public static boolean isValidDIV(Number num2, ActionTypeEnum actionTypeEnum) {
+        return !(actionTypeEnum.equals(ActionTypeEnum.DIV) & num2.doubleValue() == 0);
     }
 
     public static boolean isNumeric(String str) {

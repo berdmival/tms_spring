@@ -1,57 +1,32 @@
 package by.tms.spring.service;
 
 import by.tms.spring.action.ActionTypeEnum;
+import by.tms.spring.expression.CalcExpression;
 import by.tms.spring.util.Validator;
 import org.springframework.stereotype.Service;
 
 @Service("calc")
 public class CalcService {
-    private Double num1;
-    private Double num2;
-    private ActionTypeEnum actionType;
 
-    public void setNum1(Double num1) {
-        this.num1 = num1;
-    }
-
-    public void setNum2(Double num2) {
-        this.num2 = num2;
-    }
-
-    public void setActionType(ActionTypeEnum actionType) {
-        this.actionType = actionType;
-    }
-
-    public Double getNum1() {
-        return num1;
-    }
-
-    public Double getNum2() {
-        return num2;
-    }
-
-    public ActionTypeEnum getActionType() {
-        return actionType;
-    }
-
-    public Number calculate() {
+    public Number calculate(CalcExpression expression) {
+        ActionTypeEnum action = expression.getActionType();
         Number result;
-        switch (actionType) {
+        switch (action) {
             case SUM:
-                result = sum(this.num1, this.num2);
+                result = sum(expression.getNum1(), expression.getNum2());
                 break;
 
             case DIFF:
-                result = diff(this.num1, this.num2);
+                result = diff(expression.getNum1(), expression.getNum2());
                 break;
 
             case MULT:
-                result = mult(this.num1, this.num2);
+                result = mult(expression.getNum1(), expression.getNum2());
                 break;
 
             case DIV:
-                if (Validator.isValidDIV(this.num2, this.actionType)) {
-                    result = div(this.num1, this.num2);
+                if (Validator.isValidDIV(expression.getNum2(), action)) {
+                    result = div(expression.getNum1(), expression.getNum2());
                 } else {
                     result = null;
                 }
@@ -61,22 +36,24 @@ public class CalcService {
                 result = null;
         }
 
+        expression.setResult(result);
+
         return result;
     }
 
-    private Number sum(Double num1, Double num2) {
-        return num1 + num2;
+    private Number sum(Number num1, Number num2) {
+        return num1.doubleValue() + num2.doubleValue();
     }
 
-    private Number diff(Double num1, Double num2) {
-        return num1 - num2;
+    private Number diff(Number num1, Number num2) {
+        return num1.doubleValue() - num2.doubleValue();
     }
 
-    private Number mult(Double num1, Double num2) {
-        return num1 * num2;
+    private Number mult(Number num1, Number num2) {
+        return num1.doubleValue() * num2.doubleValue();
     }
 
-    private Number div(Double num1, Double num2) {
-        return num1 / num2;
+    private Number div(Number num1, Number num2) {
+        return num1.doubleValue() / num2.doubleValue();
     }
 }
