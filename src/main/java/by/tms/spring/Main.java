@@ -1,7 +1,7 @@
 package by.tms.spring;
 
 import by.tms.spring.action.ActionTypeEnum;
-import by.tms.spring.expression.CalcExpression;
+import by.tms.spring.expression.Expression;
 import by.tms.spring.service.CalcService;
 import by.tms.spring.service.DAOService;
 import by.tms.spring.util.Validator;
@@ -49,7 +49,7 @@ public class Main {
     }
 
     private static void addExpressionToHistory(ApplicationContext context, CalcService calcService, DAOService DAO) {
-        CalcExpression historyItem = context.getBean("historyItem", CalcExpression.class);
+        Expression historyItem = context.getBean("historyItem", Expression.class);
         historyItem.setNum1(calcService.getNum1());
         historyItem.setNum2(calcService.getNum2());
         historyItem.setActionType(calcService.getActionType());

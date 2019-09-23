@@ -1,6 +1,6 @@
 package by.tms.spring.service;
 
-import by.tms.spring.expression.CalcExpression;
+import by.tms.spring.expression.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,18 +9,18 @@ import java.util.List;
 
 @Service("dao")
 public class DAOService {
-    private List<CalcExpression> history;
+    private List<Expression> history;
 
     public List getHistory() {
         return history;
     }
 
     @Autowired
-    public DAOService(@Qualifier("history") List<CalcExpression> history) {
+    public DAOService(@Qualifier("history") List<Expression> history) {
         this.history = history;
     }
 
-    public void addToHistory (CalcExpression historyItem) {
+    public void addToHistory (Expression historyItem) {
         history.add(historyItem);
     }
 }
