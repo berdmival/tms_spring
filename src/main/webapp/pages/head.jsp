@@ -2,6 +2,6 @@
 <head>
     <title>Calculator with history and authentication</title>
     <style>
-        <%@include file="/WEB-INF/styles/mainCSS.css"%>
+        <%@include file="/styles/mainCSS.css"%>
     </style>
 </head>

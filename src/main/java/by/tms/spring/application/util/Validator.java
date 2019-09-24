@@ -1,6 +1,6 @@
-package by.tms.spring.util;
+package by.tms.spring.application.util;
 
-import by.tms.spring.action.ActionTypeEnum;
+import by.tms.spring.application.action.ActionTypeEnum;
 
 public class Validator {
 

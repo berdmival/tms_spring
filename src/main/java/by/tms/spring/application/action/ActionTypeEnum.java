@@ -1,4 +1,4 @@
-package by.tms.spring.action;
+package by.tms.spring.application.action;
 
 public enum ActionTypeEnum {
     SUM,

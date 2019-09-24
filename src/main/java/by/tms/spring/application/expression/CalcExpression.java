@@ -1,16 +1,10 @@
-package by.tms.spring.expression;
+package by.tms.spring.application.expression;
 
-import by.tms.spring.action.ActionTypeEnum;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import by.tms.spring.application.action.ActionTypeEnum;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Component("historyItem")
-@Scope("prototype")
-@Lazy()
 public class CalcExpression implements Expression {
     private Number num1;
     private Number num2;
