@@ -10,30 +10,30 @@
 <%--    <c:forEach items="${applicationScope.users}" var="user">--%>
 <%--        <c:if test="${user.isLogin()}">--%>
 <%--            <h2>${user}:</h2>--%>
-<%--            <c:if test="${user.getHistory().size() > 0}">--%>
-<%--                <table border="1">--%>
-<%--                    <caption><h2>History:</h2></caption>--%>
-<%--                    <tr>--%>
-<%--                        <th>Date</th>--%>
-<%--                        <th>Number 1</th>--%>
-<%--                        <th>Number 2</th>--%>
-<%--                        <th>Action</th>--%>
-<%--                        <th>Result</th>--%>
-<%--                    </tr>--%>
-<%--                    <c:forEach items="${user.getHistory()}" var="historyItem">--%>
-<%--                        <tr>--%>
-<%--                            <td>${historyItem.getCalcDateTime()}</td>--%>
-<%--                            <td>${historyItem.getNum1()}</td>--%>
-<%--                            <td>${historyItem.getNum2()}</td>--%>
-<%--                            <td>${historyItem.getActionType()}</td>--%>
-<%--                            <td>${historyItem.getResult()}</td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-<%--                </table>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${user.getHistory().size() == 0}">--%>
-<%--                <h2>History is empty</h2>--%>
-<%--            </c:if>--%>
+            <c:if test="${requestScope.history.size() > 0}">
+                <table border="1">
+                    <caption><h2>History:</h2></caption>
+                    <tr>
+                        <th>Date</th>
+                        <th>Number 1</th>
+                        <th>Number 2</th>
+                        <th>Action</th>
+                        <th>Result</th>
+                    </tr>
+                    <c:forEach items="${requestScope.history}" var="historyItem">
+                        <tr>
+                            <td>${historyItem.getCalcDateTime()}</td>
+                            <td>${historyItem.getNum1()}</td>
+                            <td>${historyItem.getNum2()}</td>
+                            <td>${historyItem.getActionType()}</td>
+                            <td>${historyItem.getResult()}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
+            <c:if test="${requestScope.history.size() == 0}">
+                <h2>History is empty</h2>
+            </c:if>
 <%--            <hr size="2" color="black">--%>
 <%--        </c:if>--%>
 <%--    </c:forEach>--%>

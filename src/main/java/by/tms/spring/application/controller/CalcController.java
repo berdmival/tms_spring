@@ -29,6 +29,7 @@ public class CalcController {
     public ModelAndView index(ModelAndView modelAndView) {
         modelAndView.setViewName("calc");
         modelAndView.addObject("name", "Guest");
+        modelAndView.addObject("history", repository.getHistory());
         return modelAndView;
     }
 
