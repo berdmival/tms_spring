@@ -2,7 +2,7 @@ package by.tms.spring.application.model.user;
 
 import java.util.Objects;
 
-public class CalcUser implements User{
+public class CalcUser implements User {
     private int id;
     private String name;
     private String email;

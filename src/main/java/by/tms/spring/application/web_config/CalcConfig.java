@@ -17,17 +17,17 @@ import java.util.Map;
 public class CalcConfig {
 
     @Bean("users")
-    public List<User> users(){
+    public List<User> users() {
         return new ArrayList<>();
     }
 
     @Bean("history")
-    public Map<String, List<Expression>> history(){
+    public Map<String, List<Expression>> history() {
         return new HashMap<>();
     }
 
     @Bean
-    public InternalResourceViewResolver viewResolver(){
+    public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/pages/");
         viewResolver.setSuffix(".jsp");

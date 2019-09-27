@@ -1,9 +1,7 @@
 package by.tms.spring.application.controller;
 
 import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.repository.CalcHistoryRepository;
 import by.tms.spring.application.service.UserService;
-import by.tms.spring.application.util.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 
 @Controller
 @RequestMapping(path = "/reg")

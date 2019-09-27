@@ -1,17 +1,17 @@
 package by.tms.spring.application.controller;
 
 import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.repository.CalcHistoryRepository;
 import by.tms.spring.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/auth")
@@ -44,7 +44,7 @@ public class AuthController {
             session.setAttribute("user", user);
             modelAndView.setViewName("redirect:/");
         } else {
-            session.setAttribute("message", NAME_OR_PASSWORD_IS_INCORRECT_MESSAGE);
+            modelAndView.addObject("message", NAME_OR_PASSWORD_IS_INCORRECT_MESSAGE);
             modelAndView.setViewName("auth");
         }
         return modelAndView;
