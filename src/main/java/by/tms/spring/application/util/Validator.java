@@ -1,8 +1,33 @@
 package by.tms.spring.application.util;
 
 import by.tms.spring.application.action.ActionTypeEnum;
+import by.tms.spring.application.model.user.CalcUser;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 public class Validator {
+
+    @Resource(name = "users")
+    static List<CalcUser> users;
+
+    public static boolean isExistingUser(String userName) {
+        for (CalcUser userItem : users) {
+            if (userItem.getName().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isValidUser(CalcUser user) {
+        for (CalcUser userItem : users) {
+            if (userItem.equals(user)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static boolean isValidAction(String input) {
         for (ActionTypeEnum actionType : ActionTypeEnum.values()) {

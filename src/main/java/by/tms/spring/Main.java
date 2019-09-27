@@ -12,7 +12,7 @@ public class Main implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.setConfigLocation("by.tms.spring.web_config");
+        dispatcherContext.setConfigLocation("by.tms.spring.application.web_config");
 
         ServletRegistration.Dynamic dispatcher =
                 servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));

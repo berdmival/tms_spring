@@ -1,7 +1,7 @@
 package by.tms.spring.application.util;
 
 import by.tms.spring.application.action.ActionTypeEnum;
-import by.tms.spring.application.expression.CalcExpression;
+import by.tms.spring.application.model.expression.CalcExpression;
 
 
 public class Calculator {

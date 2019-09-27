@@ -1,4 +1,4 @@
-package by.tms.spring.application.expression;
+package by.tms.spring.application.model.expression;
 
 import by.tms.spring.application.action.ActionTypeEnum;
 
