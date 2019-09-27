@@ -1,27 +1,37 @@
 package by.tms.spring.application.controller;
 
+import by.tms.spring.application.repository.HistoryRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(path = "/auth")
 public class AuthController {
 
-    @GetMapping
-    public ModelAndView index(ModelAndView modelAndView) {
-        modelAndView.setViewName("index");
-        modelAndView.addObject("name", "Guest");
-        return modelAndView;
-    }
+    @Resource(name = "historyRepository")
+    HistoryRepository repository;
 
-    @GetMapping(path = "/auth")
+    @GetMapping
     public ModelAndView index(ModelAndView modelAndView,
                               @RequestParam(name = "name", required = false, defaultValue = "Guest") String name) {
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("auth");
         modelAndView.addObject("name", name);
         return modelAndView;
     }
+
+    @PostMapping
+    public ModelAndView index(ModelAndView modelAndView,
+                              HttpServletRequest servletRequest,
+                              @RequestParam(name = "name", required = false, defaultValue = "Guest") String name) {
+        servletRequest.getSession().setAttribute("user", name);
+        modelAndView.addObject("name", name);
+        modelAndView.addObject("history", repository.getHistory());
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
+
 }

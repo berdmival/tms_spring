@@ -34,25 +34,25 @@
             <c:if test="${requestScope.history.size() == 0}">
                 <h2>History is empty</h2>
             </c:if>
-<%--            <hr size="2" color="black">--%>
+            <hr size="2" color="black">
 <%--        </c:if>--%>
 <%--    </c:forEach>--%>
 <%--</c:if>--%>
-<%--<c:if test="${sessionScope.user == null}">--%>
-<%--    <H1>Please, authorise first</H1>--%>
-<%--</c:if>--%>
+<c:if test="${sessionScope.user == null}">
+    <H1>Please, authorise first</H1>
+</c:if>
 
 <%--<c:if test="${sessionScope.user == null}">--%>
 <%--    <a class="btn" href="${pageContext.request.contextPath}/reg">Sign up</a>--%>
 <%--</c:if>--%>
-<%--<c:if test="${sessionScope.user == null}">--%>
-<%--    <a class="btn" href="${pageContext.request.contextPath}/auth">Sign in</a>--%>
-<%--</c:if>--%>
+<c:if test="${sessionScope.user == null}">
+    <a class="btn" href="${pageContext.request.contextPath}/auth">Sign in</a>
+</c:if>
 <%--<c:if test="${sessionScope.user != null}">--%>
 <%--    <a class="btn" href="${pageContext.request.contextPath}/logout">Logout</a>--%>
 <%--</c:if>--%>
-<%--<c:if test="${sessionScope.user != null}">--%>
+<c:if test="${sessionScope.user != null}">
     <a class="btn" href="${pageContext.request.contextPath}/calc">Calculator</a>
-<%--</c:if>--%>
+</c:if>
 </body>
 </html>
