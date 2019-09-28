@@ -12,7 +12,7 @@ import java.util.Map;
 @Service("historyService")
 public class CalcHistoryService implements HistoryService {
 
-    final HistoryRepository historyRepository;
+    private final HistoryRepository historyRepository;
 
     @Autowired
     public CalcHistoryService(@Qualifier("historyRepository") HistoryRepository historyRepository) {
