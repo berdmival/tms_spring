@@ -5,31 +5,31 @@
 <body>
 <h1>Enter numbers and select action. Then click "Calculate".</h1>
 
-<%--<c:if test="${requestScope.history.size() > 0}">--%>
-<%--    <table border="1">--%>
-<%--        <caption><h2>History:</h2></caption>--%>
-<%--        <tr>--%>
-<%--            <th>Date</th>--%>
-<%--            <th>Number 1</th>--%>
-<%--            <th>Number 2</th>--%>
-<%--            <th>Action</th>--%>
-<%--            <th>Result</th>--%>
-<%--        </tr>--%>
-<%--        <c:forEach var="historyItem" items="${requestScope.history}">--%>
-<%--            <tr>--%>
-<%--                <td>${historyItem.getCalcDateTime()}</td>--%>
-<%--                <td>${historyItem.getNum1()}</td>--%>
-<%--                <td>${historyItem.getNum2()}</td>--%>
-<%--                <td>${historyItem.getActionType()}</td>--%>
-<%--                <td>${historyItem.getResult()}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
-<%--    <hr size="2" color="black">--%>
-<%--</c:if>--%>
-<%--<c:if test="${requestScope.history.size() == 0}">--%>
-<%--    <h2>History is empty</h2>--%>
-<%--</c:if>--%>
+<c:if test="${requestScope.history.size() > 0}">
+    <table border="1">
+        <caption><h2>History:</h2></caption>
+        <tr>
+            <th>Date</th>
+            <th>Number 1</th>
+            <th>Number 2</th>
+            <th>Action</th>
+            <th>Result</th>
+        </tr>
+        <c:forEach var="historyItem" items="${requestScope.history}">
+            <tr>
+                <td>${historyItem.getCalcDateTime()}</td>
+                <td>${historyItem.getNum1()}</td>
+                <td>${historyItem.getNum2()}</td>
+                <td>${historyItem.getActionType()}</td>
+                <td>${historyItem.getResult()}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <hr size="2" color="black">
+</c:if>
+<c:if test="${requestScope.history.size() == 0}">
+    <h2>History is empty</h2>
+</c:if>
 
 <h2>Current result: <c:out value="${requestScope.message}"/></h2>
 

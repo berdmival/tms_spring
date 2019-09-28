@@ -2,8 +2,11 @@ package by.tms.spring.application.controller;
 
 import by.tms.spring.application.action.ActionTypeEnum;
 import by.tms.spring.application.model.expression.CalcExpressionRecord;
+import by.tms.spring.application.model.user.CalcUser;
+import by.tms.spring.application.service.HistoryService;
 import by.tms.spring.application.util.Calculator;
-import by.tms.spring.application.util.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,35 +14,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(path = "/calc")
 public class CalcController {
 
-    private static final String CHECK_YOUR_INPUT_PLEASE_MESSAGE = "Check your input, please!";
+    private final HistoryService historyService;
+
+    @Autowired
+    public CalcController(@Qualifier("historyService") HistoryService historyService) {
+        this.historyService = historyService;
+    }
 
     @GetMapping
-    public ModelAndView index(ModelAndView modelAndView) {
+    public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
+
         modelAndView.setViewName("calc");
+
+        int userId = ((CalcUser) session.getAttribute("user")).getId();
+
+        if (historyService.getUserHistory(userId) == null) {
+            historyService.createHistoryForUser(userId);
+        }
+
+        modelAndView.addObject("history", historyService.getUserHistory(userId));
+
         return modelAndView;
     }
 
     @PostMapping
     public ModelAndView index(ModelAndView modelAndView,
+                              HttpSession session,
                               @RequestParam(name = "num1") String num1,
                               @RequestParam(name = "num2") String num2,
                               @RequestParam(name = "action") String action) {
 
-        if (Validator.isNumeric(num1) & Validator.isNumeric(num2) & Validator.isValidAction(action.toUpperCase())) {
-            CalcExpressionRecord expression = new CalcExpressionRecord();
-            expression.setNum1(Double.parseDouble(num1));
-            expression.setNum2(Double.parseDouble(num2));
-            expression.setActionType(ActionTypeEnum.valueOf(action.toUpperCase()));
-            Calculator.calculate(expression);
+        int userId = ((CalcUser) session.getAttribute("user")).getId();
 
-            modelAndView.addObject("message", expression.getResult());
-        } else {
-            modelAndView.addObject("message", CHECK_YOUR_INPUT_PLEASE_MESSAGE);
-        }
+        CalcExpressionRecord expression = new CalcExpressionRecord();
+        expression.setNum1(Double.parseDouble(num1));
+        expression.setNum2(Double.parseDouble(num2));
+        expression.setActionType(ActionTypeEnum.valueOf(action.toUpperCase()));
+        Calculator.calculate(expression);
+
+        historyService.addRecordForUsersHistory(userId, expression);
+
+        modelAndView.addObject("message", expression.getResult());
+        modelAndView.addObject("history", historyService.getUserHistory(userId));
 
         modelAndView.setViewName("calc");
         return modelAndView;
