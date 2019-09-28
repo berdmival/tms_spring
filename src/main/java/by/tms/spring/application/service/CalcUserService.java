@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 public class CalcUserService implements UserService {
 
@@ -39,6 +41,11 @@ public class CalcUserService implements UserService {
         CalcUser user = (CalcUser) userRepository.findById(id);
         if (user != null) user.logout();
         return user;
+    }
+
+    @Override
+    public List<User> findOnlineUsers() {
+        return userRepository.findOnline();
     }
 
 }

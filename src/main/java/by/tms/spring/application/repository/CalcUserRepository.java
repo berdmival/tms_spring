@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("userRepository")
@@ -21,16 +22,6 @@ public class CalcUserRepository implements UserRepository {
     @Override
     public void add(User user) {
         users.add(user);
-    }
-
-    @Override
-    public CalcUser findByName(String name) {
-        for (User u : users
-        ) {
-            CalcUser user = (CalcUser) u;
-            if (user.getName().equals(name)) return user;
-        }
-        return null;
     }
 
     @Override
@@ -61,6 +52,17 @@ public class CalcUserRepository implements UserRepository {
             if (user.getId() == id) return user;
         }
         return null;
+    }
+
+    @Override
+    public List<User> findOnline() {
+        List<User> onlineUsers = new ArrayList<>();
+        for (User u : users
+        ) {
+            CalcUser user = (CalcUser) u;
+            if (user.isLogin()) onlineUsers.add(user);
+        }
+        return onlineUsers;
     }
 
 }
