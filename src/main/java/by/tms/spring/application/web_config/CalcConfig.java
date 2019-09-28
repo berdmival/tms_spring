@@ -1,6 +1,6 @@
 package by.tms.spring.application.web_config;
 
-import by.tms.spring.application.model.expression.Expression;
+import by.tms.spring.application.model.expression.ExpressionRecord;
 import by.tms.spring.application.model.user.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +22,7 @@ public class CalcConfig {
     }
 
     @Bean("history")
-    public Map<String, List<Expression>> history() {
+    public Map<Integer, List<ExpressionRecord>> history() {
         return new HashMap<>();
     }
 

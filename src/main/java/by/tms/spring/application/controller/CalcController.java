@@ -1,7 +1,7 @@
 package by.tms.spring.application.controller;
 
 import by.tms.spring.application.action.ActionTypeEnum;
-import by.tms.spring.application.model.expression.CalcExpression;
+import by.tms.spring.application.model.expression.CalcExpressionRecord;
 import by.tms.spring.application.util.Calculator;
 import by.tms.spring.application.util.Validator;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class CalcController {
                               @RequestParam(name = "action") String action) {
 
         if (Validator.isNumeric(num1) & Validator.isNumeric(num2) & Validator.isValidAction(action.toUpperCase())) {
-            CalcExpression expression = new CalcExpression();
+            CalcExpressionRecord expression = new CalcExpressionRecord();
             expression.setNum1(Double.parseDouble(num1));
             expression.setNum2(Double.parseDouble(num2));
             expression.setActionType(ActionTypeEnum.valueOf(action.toUpperCase()));

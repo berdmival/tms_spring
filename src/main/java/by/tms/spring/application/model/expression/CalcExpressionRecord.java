@@ -5,7 +5,7 @@ import by.tms.spring.application.action.ActionTypeEnum;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CalcExpression implements Expression {
+public class CalcExpressionRecord implements ExpressionRecord {
     private Number num1;
     private Number num2;
     private ActionTypeEnum actionType;
@@ -13,7 +13,7 @@ public class CalcExpression implements Expression {
     private LocalDateTime calcDateTime;
     private String dateTimeHistoryPattern;
 
-    public CalcExpression() {
+    public CalcExpressionRecord() {
         this.calcDateTime = LocalDateTime.now();
     }
 

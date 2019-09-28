@@ -1,12 +1,12 @@
 package by.tms.spring.application.util;
 
 import by.tms.spring.application.action.ActionTypeEnum;
-import by.tms.spring.application.model.expression.CalcExpression;
+import by.tms.spring.application.model.expression.CalcExpressionRecord;
 
 
 public class Calculator {
 
-    public static void calculate(CalcExpression expression) {
+    public static void calculate(CalcExpressionRecord expression) {
         ActionTypeEnum action = expression.getActionType();
         Number result;
         switch (action) {
