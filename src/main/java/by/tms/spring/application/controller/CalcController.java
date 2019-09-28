@@ -3,8 +3,9 @@ package by.tms.spring.application.controller;
 import by.tms.spring.application.action.ActionTypeEnum;
 import by.tms.spring.application.model.expression.CalcExpressionRecord;
 import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.service.HistoryService;
+import by.tms.spring.application.service.CalcExpressionRecordService;
 import by.tms.spring.application.service.CalcService;
+import by.tms.spring.application.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,15 @@ public class CalcController {
 
     private final HistoryService historyService;
     private final CalcService calcService;
+    private final CalcExpressionRecordService calcExpressionRecordService;
 
     @Autowired
     public CalcController(@Qualifier("historyService") HistoryService historyService,
-                          @Qualifier("calcService") CalcService calcService) {
+                          @Qualifier("calcService") CalcService calcService,
+                          @Qualifier("expressionRecordService") CalcExpressionRecordService calcExpressionRecordService) {
         this.historyService = historyService;
         this.calcService = calcService;
+        this.calcExpressionRecordService = calcExpressionRecordService;
     }
 
     @GetMapping
@@ -49,16 +53,16 @@ public class CalcController {
     @PostMapping
     public ModelAndView index(ModelAndView modelAndView,
                               HttpSession session,
-                              @RequestParam(name = "num1") String num1,
-                              @RequestParam(name = "num2") String num2,
+                              @RequestParam(name = "num1") double num1,
+                              @RequestParam(name = "num2") double num2,
                               @RequestParam(name = "action") String action) {
 
         int userId = ((CalcUser) session.getAttribute("user")).getId();
 
-        CalcExpressionRecord expression = new CalcExpressionRecord();
-        expression.setNum1(Double.parseDouble(num1));
-        expression.setNum2(Double.parseDouble(num2));
-        expression.setActionType(ActionTypeEnum.valueOf(action.toUpperCase()));
+        CalcExpressionRecord expression = calcExpressionRecordService.createExpressionRecord(
+                num1,
+                num2,
+                ActionTypeEnum.valueOf(action.toUpperCase()));
 
         calcService.calculate(expression);
 
