@@ -32,8 +32,10 @@ public class CalcUserService implements UserService {
     @Override
     public User login(String email, String password) {
         CalcUser user = (CalcUser) userRepository.findByEmailAndPassword(email, password);
-        if (user != null) user.login();
-        return user;
+        if (user != null && !user.isLogin()) {
+            user.login();
+            return user;
+        } else return null;
     }
 
     @Override

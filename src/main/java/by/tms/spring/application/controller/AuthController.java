@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path = "/auth")
 public class AuthController {
 
-    private static final String NAME_OR_PASSWORD_IS_INCORRECT_MESSAGE = "Name or password is incorrect!";
+    private static final String INCORRECT = "Authenticate failed!";
 
     private final UserService userService;
 
@@ -44,7 +44,7 @@ public class AuthController {
             session.setAttribute("user", user);
             modelAndView.setViewName("redirect:/");
         } else {
-            modelAndView.addObject("message", NAME_OR_PASSWORD_IS_INCORRECT_MESSAGE);
+            modelAndView.addObject("message", INCORRECT);
             modelAndView.setViewName("auth");
         }
         return modelAndView;
