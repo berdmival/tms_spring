@@ -1,12 +1,14 @@
-package by.tms.spring.application.util;
+package by.tms.spring.application.service;
 
 import by.tms.spring.application.action.ActionTypeEnum;
 import by.tms.spring.application.model.expression.CalcExpressionRecord;
+import by.tms.spring.application.util.Validator;
+import org.springframework.stereotype.Service;
 
+@Service("calcService")
+public class CalcService {
 
-public class Calculator {
-
-    public static void calculate(CalcExpressionRecord expression) {
+    public void calculate(CalcExpressionRecord expression) {
         ActionTypeEnum action = expression.getActionType();
         Number result;
         switch (action) {
@@ -37,19 +39,19 @@ public class Calculator {
         expression.setResult(result);
     }
 
-    private static Number sum(Number num1, Number num2) {
+    private Number sum(Number num1, Number num2) {
         return num1.doubleValue() + num2.doubleValue();
     }
 
-    private static Number diff(Number num1, Number num2) {
+    private Number diff(Number num1, Number num2) {
         return num1.doubleValue() - num2.doubleValue();
     }
 
-    private static Number mult(Number num1, Number num2) {
+    private Number mult(Number num1, Number num2) {
         return num1.doubleValue() * num2.doubleValue();
     }
 
-    private static Number div(Number num1, Number num2) {
+    private Number div(Number num1, Number num2) {
         return num1.doubleValue() / num2.doubleValue();
     }
 

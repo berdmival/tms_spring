@@ -4,7 +4,7 @@ import by.tms.spring.application.action.ActionTypeEnum;
 import by.tms.spring.application.model.expression.CalcExpressionRecord;
 import by.tms.spring.application.model.user.CalcUser;
 import by.tms.spring.application.service.HistoryService;
-import by.tms.spring.application.util.Calculator;
+import by.tms.spring.application.service.CalcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,10 +21,13 @@ import javax.servlet.http.HttpSession;
 public class CalcController {
 
     private final HistoryService historyService;
+    private final CalcService calcService;
 
     @Autowired
-    public CalcController(@Qualifier("historyService") HistoryService historyService) {
+    public CalcController(@Qualifier("historyService") HistoryService historyService,
+                          @Qualifier("calcService") CalcService calcService) {
         this.historyService = historyService;
+        this.calcService = calcService;
     }
 
     @GetMapping
@@ -56,7 +59,8 @@ public class CalcController {
         expression.setNum1(Double.parseDouble(num1));
         expression.setNum2(Double.parseDouble(num2));
         expression.setActionType(ActionTypeEnum.valueOf(action.toUpperCase()));
-        Calculator.calculate(expression);
+
+        calcService.calculate(expression);
 
         historyService.addRecordForUsersHistory(userId, expression);
 
