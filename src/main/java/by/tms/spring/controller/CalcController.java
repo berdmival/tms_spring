@@ -57,6 +57,7 @@ public class CalcController {
         modelAndView.addObject("message", expression.getResult());
         modelAndView.addObject("history", historyService.getUserHistory(userId));
         modelAndView.addObject("possibleActions", ActionTypeEnum.values());
+        modelAndView.addObject("expression", new ExpressionRecord());
 
         modelAndView.setViewName("calc");
         return modelAndView;
