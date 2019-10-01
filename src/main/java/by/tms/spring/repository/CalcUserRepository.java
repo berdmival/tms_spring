@@ -1,7 +1,6 @@
-package by.tms.spring.application.repository;
+package by.tms.spring.repository;
 
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.model.user.User;
+import by.tms.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -25,30 +24,27 @@ public class CalcUserRepository implements UserRepository {
     }
 
     @Override
-    public CalcUser findByEmail(String email) {
-        for (User u : users
+    public User findByEmail(String email) {
+        for (User user : users
         ) {
-            CalcUser user = (CalcUser) u;
             if (user.getEmail().equals(email)) return user;
         }
         return null;
     }
 
     @Override
-    public CalcUser findByEmailAndPassword(String email, String password) {
-        for (User u : users
+    public User findByEmailAndPassword(String email, String password) {
+        for (User user : users
         ) {
-            CalcUser user = (CalcUser) u;
             if (user.getEmail().equals(email) & user.getPassword().equals(password)) return user;
         }
         return null;
     }
 
     @Override
-    public CalcUser findById(int id) {
-        for (User u : users
+    public User findById(int id) {
+        for (User user : users
         ) {
-            CalcUser user = (CalcUser) u;
             if (user.getId() == id) return user;
         }
         return null;
@@ -57,9 +53,8 @@ public class CalcUserRepository implements UserRepository {
     @Override
     public List<User> findOnline() {
         List<User> onlineUsers = new ArrayList<>();
-        for (User u : users
+        for (User user : users
         ) {
-            CalcUser user = (CalcUser) u;
             if (user.isLogin()) onlineUsers.add(user);
         }
         return onlineUsers;

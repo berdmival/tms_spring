@@ -1,6 +1,6 @@
-package by.tms.spring.application.service;
+package by.tms.spring.service;
 
-import by.tms.spring.application.model.expression.ExpressionRecord;
+import by.tms.spring.model.ExpressionRecord;
 
 import java.util.List;
 import java.util.Map;

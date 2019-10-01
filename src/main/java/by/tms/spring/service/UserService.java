@@ -1,6 +1,7 @@
-package by.tms.spring.application.service;
+package by.tms.spring.service;
 
-import by.tms.spring.application.model.user.User;
+import by.tms.spring.model.AuthData;
+import by.tms.spring.model.User;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserService {
 
     List<User> findOnlineUsers();
 
+    User login(AuthData authData);
 }

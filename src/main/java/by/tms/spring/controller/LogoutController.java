@@ -1,9 +1,7 @@
-package by.tms.spring.application.controller;
+package by.tms.spring.controller;
 
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import by.tms.spring.model.User;
+import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +14,13 @@ public class LogoutController {
 
     private final UserService userService;
 
-    @Autowired
-    public LogoutController(@Qualifier("userService") UserService userService) {
+    public LogoutController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
     public String logout(HttpSession session) {
-        userService.logout(((CalcUser) session.getAttribute("user")).getId());
+        userService.logout(((User) session.getAttribute("user")).getId());
         session.invalidate();
         return "index";
     }

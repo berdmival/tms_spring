@@ -1,14 +1,14 @@
-package by.tms.spring.application.controller;
+package by.tms.spring.controller;
 
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import by.tms.spring.model.AuthData;
+import by.tms.spring.model.User;
+import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -21,24 +21,24 @@ public class AuthController {
 
     private final UserService userService;
 
-    @Autowired
-    public AuthController(@Qualifier("userService") UserService userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public String auth() {
+    public String auth(Model model) {
+        model.addAttribute("authData", new AuthData());
         return "auth";
     }
 
     @PostMapping
     public ModelAndView auth(ModelAndView modelAndView,
-                              //TODO session annotation
-                              HttpSession session,
-                              @RequestParam(name = "email") String email,
-                              @RequestParam(name = "password") String password) {
+                             //TODO session annotation
+                             HttpSession session,
+                             @ModelAttribute("authData") AuthData authData
+                             ) {
 
-        CalcUser user = (CalcUser) userService.login(email, password);
+        User user = userService.login(authData);
 
         if (user != null) {
             session.setAttribute("user", user);

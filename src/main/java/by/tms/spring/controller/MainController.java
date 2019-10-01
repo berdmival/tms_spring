@@ -1,12 +1,9 @@
-package by.tms.spring.application.controller;
+package by.tms.spring.controller;
 
-import by.tms.spring.application.model.expression.ExpressionRecord;
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.model.user.User;
-import by.tms.spring.application.service.HistoryService;
-import by.tms.spring.application.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import by.tms.spring.model.ExpressionRecord;
+import by.tms.spring.model.User;
+import by.tms.spring.service.HistoryService;
+import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +20,8 @@ public class MainController {
     private final HistoryService historyService;
     private final UserService userService;
 
-    @Autowired
-    public MainController(@Qualifier("historyService") HistoryService historyService,
-                          @Qualifier("userService") UserService userService) {
+    public MainController(HistoryService historyService,
+                          UserService userService) {
         this.historyService = historyService;
         this.userService = userService;
     }
@@ -38,9 +34,9 @@ public class MainController {
         modelAndView.addObject("onlineUsers", onlineUsers);
 
         Map<Integer, List<ExpressionRecord>> historyOnlineUsers = new HashMap<>();
-        for (User u:
-             onlineUsers) {
-            CalcUser user = (CalcUser) u;
+        for (User u :
+                onlineUsers) {
+            User user = u;
             historyOnlineUsers.put(user.getId(), historyService.getUserHistory(user.getId()));
         }
         modelAndView.addObject("historyOfOnlineUsers", historyOnlineUsers);

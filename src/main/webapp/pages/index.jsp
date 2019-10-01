@@ -4,7 +4,7 @@
 <%@include file="/pages/head.jsp" %>
 <body>
 <c:if test="${user != null}">
-    <H1>Hello, <c:out value="${user.getName()}"/>!</H1>
+    <H1>Hello, <c:out value="${user.name}"/>!</H1>
     <hr size="2" color="black">
 
     <h1>Online users:</h1>
@@ -12,7 +12,7 @@
 
     <c:forEach items="${onlineUsers}" var="onlineUser">
                 <h2>${onlineUser}:</h2>
-    <c:if test="${historyOfOnlineUsers.get(onlineUser.getId()).size() > 0}">
+    <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() > 0}">
         <table border="1">
             <caption><h2>History:</h2></caption>
             <tr>
@@ -22,18 +22,18 @@
                 <th>Action</th>
                 <th>Result</th>
             </tr>
-            <c:forEach items="${historyOfOnlineUsers.get(onlineUser.getId())}" var="historyItem">
+            <c:forEach items="${historyOfOnlineUsers.get(onlineUser.id)}" var="historyItem">
                 <tr>
-                    <td>${historyItem.getCalcDateTime()}</td>
-                    <td>${historyItem.getNum1()}</td>
-                    <td>${historyItem.getNum2()}</td>
-                    <td>${historyItem.getActionType()}</td>
-                    <td>${historyItem.getResult()}</td>
+                    <td>${historyItem.calcDateTime}</td>
+                    <td>${historyItem.num1}</td>
+                    <td>${historyItem.num2}</td>
+                    <td>${historyItem.actionType}</td>
+                    <td>${historyItem.result}</td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
-    <c:if test="${historyOfOnlineUsers.get(onlineUser.getId()).size() == 0}">
+    <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() == 0}">
         <h2>History is empty</h2>
     </c:if>
     <hr size="2" color="black">

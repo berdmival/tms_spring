@@ -1,8 +1,8 @@
-package by.tms.spring.application.service;
+package by.tms.spring.service;
 
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.model.user.User;
-import by.tms.spring.application.repository.UserRepository;
+import by.tms.spring.model.AuthData;
+import by.tms.spring.model.User;
+import by.tms.spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class CalcUserService implements UserService {
 
     @Override
     public boolean register(User user) {
-        if (userRepository.findByEmail(((CalcUser) user).getEmail()) == null) {
+        if (userRepository.findByEmail(user.getEmail()) == null) {
             userRepository.add(user);
             return true;
         } else {
@@ -31,7 +31,7 @@ public class CalcUserService implements UserService {
 
     @Override
     public User login(String email, String password) {
-        CalcUser user = (CalcUser) userRepository.findByEmailAndPassword(email, password);
+        User user = userRepository.findByEmailAndPassword(email, password);
         if (user != null && !user.isLogin()) {
             user.login();
             return user;
@@ -40,7 +40,7 @@ public class CalcUserService implements UserService {
 
     @Override
     public User logout(int id) {
-        CalcUser user = (CalcUser) userRepository.findById(id);
+        User user = userRepository.findById(id);
         if (user != null) user.logout();
         return user;
     }
@@ -49,5 +49,13 @@ public class CalcUserService implements UserService {
     public List<User> findOnlineUsers() {
         return userRepository.findOnline();
     }
+
+    @Override
+    public User login(AuthData authData) {
+        User user = userRepository.findByEmailAndPassword(authData.getEmail(), authData.getPassword());
+        if (user != null && !user.isLogin()) {
+            user.login();
+            return user;
+        } else return null;    }
 
 }

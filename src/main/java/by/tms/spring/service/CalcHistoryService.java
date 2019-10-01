@@ -1,7 +1,7 @@
-package by.tms.spring.application.service;
+package by.tms.spring.service;
 
-import by.tms.spring.application.model.expression.ExpressionRecord;
-import by.tms.spring.application.repository.HistoryRepository;
+import by.tms.spring.model.ExpressionRecord;
+import by.tms.spring.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

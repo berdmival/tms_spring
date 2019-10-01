@@ -1,20 +1,21 @@
-package by.tms.spring.application.model.user;
+package by.tms.spring.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class CalcUser implements User {
+public class User implements Serializable {
+    private static int idIncrementer;
     private int id;
     private String name;
     private String email;
     private int age;
-    private static int idIncrementer;
     private String password;
     private boolean isLogin;
 
-    public CalcUser() {
+    public User() {
     }
 
-    public CalcUser(String name, String email, int age, String password) {
+    public User(String name, String email, int age, String password) {
         this.email = email;
         this.id = idIncrementer++;
         this.name = name;
@@ -36,7 +37,7 @@ public class CalcUser implements User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CalcUser user = (CalcUser) o;
+        User user = (User) o;
         return email.equals(user.email) &&
                 password.equals(user.password);
     }

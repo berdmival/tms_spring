@@ -1,7 +1,7 @@
-package by.tms.spring.application.util;
+package by.tms.spring.util;
 
-import by.tms.spring.application.action.ActionTypeEnum;
-import by.tms.spring.application.model.user.CalcUser;
+import by.tms.spring.action.ActionTypeEnum;
+import by.tms.spring.model.User;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 public class Validator {
 
     @Resource(name = "users")
-    static List<CalcUser> users;
+    static List<User> users;
 
     public static boolean isExistingUser(String userName) {
-        for (CalcUser userItem : users) {
+        for (User userItem : users) {
             if (userItem.getName().equals(userName)) {
                 return true;
             }
@@ -20,8 +20,8 @@ public class Validator {
         return false;
     }
 
-    public static boolean isValidUser(CalcUser user) {
-        for (CalcUser userItem : users) {
+    public static boolean isValidUser(User user) {
+        for (User userItem : users) {
             if (userItem.equals(user)) {
                 return true;
             }

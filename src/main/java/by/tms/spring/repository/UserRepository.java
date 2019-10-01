@@ -1,6 +1,6 @@
-package by.tms.spring.application.repository;
+package by.tms.spring.repository;
 
-import by.tms.spring.application.model.user.User;
+import by.tms.spring.model.User;
 
 import java.util.List;
 

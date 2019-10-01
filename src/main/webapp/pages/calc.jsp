@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <html>
 <%@include file="/pages/head.jsp" %>
 <body>
@@ -17,11 +18,11 @@
         </tr>
         <c:forEach var="historyItem" items="${requestScope.history}">
             <tr>
-                <td>${historyItem.getCalcDateTime()}</td>
-                <td>${historyItem.getNum1()}</td>
-                <td>${historyItem.getNum2()}</td>
-                <td>${historyItem.getActionType()}</td>
-                <td>${historyItem.getResult()}</td>
+                <td>${historyItem.calcDateTime}</td>
+                <td>${historyItem.num1}</td>
+                <td>${historyItem.num2}</td>
+                <td>${historyItem.actionType}</td>
+                <td>${historyItem.result}</td>
             </tr>
         </c:forEach>
     </table>
@@ -33,17 +34,16 @@
 
 <h2>Current result: <c:out value="${requestScope.message}"/></h2>
 
-<form action="${pageContext.request.contextPath}/calc" method="post">
-    <input required autofocus placeholder="num1" type="number" name="num1" step="any">
-    <select required name="action">
-        <option value="sum">+</option>
-        <option value="mult">*</option>
-        <option value="diff">-</option>
-        <option value="div">/</option>
-    </select>
-    <input required placeholder="num2" type="number" name="num2" step="any">
-    <button type="submit">Calculate</button>
-</form>
+<spring:form action="/calc" method="post" modelAttribute="expression">
+    <spring:input required="true" autofocus="true" placeholder="num1" type="number" step="any" path="num1"/>
+    <spring:select required="true" path="actionType">
+        <c:forEach items="${possibleActions}" var="actionItem">
+            <spring:option value="${actionItem}">${actionItem.actCode}</spring:option>
+        </c:forEach>
+    </spring:select>
+    <spring:input required="true" placeholder="num2" type="number" name="num2" step="any" path="num2"/>
+    <spring:button>Calculate</spring:button>
+</spring:form>
 <a class="btn" href="${pageContext.request.contextPath}/">Home</a>
 <a class="btn" href="${pageContext.request.contextPath}/logout">Logout</a>
 </body>

@@ -1,8 +1,6 @@
-package by.tms.spring.application.repository;
+package by.tms.spring.repository;
 
-import by.tms.spring.application.model.expression.ExpressionRecord;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import by.tms.spring.model.ExpressionRecord;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,8 +12,7 @@ public class CalcHistoryRepository implements HistoryRepository {
 
     private Map<Integer, List<ExpressionRecord>> history;
 
-    @Autowired
-    public CalcHistoryRepository(@Qualifier("history") Map<Integer, List<ExpressionRecord>> history) {
+    public CalcHistoryRepository(Map<Integer, List<ExpressionRecord>> history) {
         this.history = history;
     }
 

@@ -1,14 +1,14 @@
-package by.tms.spring.application.service;
+package by.tms.spring.service;
 
-import by.tms.spring.application.action.ActionTypeEnum;
-import by.tms.spring.application.model.expression.CalcExpressionRecord;
-import by.tms.spring.application.util.Validator;
+import by.tms.spring.action.ActionTypeEnum;
+import by.tms.spring.model.ExpressionRecord;
+import by.tms.spring.util.Validator;
 import org.springframework.stereotype.Service;
 
 @Service("calcService")
 public class CalcService {
 
-    public void calculate(CalcExpressionRecord expression) {
+    public void calculate(ExpressionRecord expression) {
         ActionTypeEnum action = expression.getActionType();
         Number result;
         switch (action) {

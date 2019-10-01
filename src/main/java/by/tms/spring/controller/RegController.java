@@ -1,14 +1,13 @@
-package by.tms.spring.application.controller;
+package by.tms.spring.controller;
 
-import by.tms.spring.application.model.user.CalcUser;
-import by.tms.spring.application.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import by.tms.spring.model.User;
+import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -19,24 +18,21 @@ public class RegController {
 
     private final UserService userService;
 
-    @Autowired
-    public RegController(@Qualifier("userService") UserService userService) {
+    public RegController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public String reg() {
+    public String reg(Model model) {
+        model.addAttribute("newUser", new User());
         return "reg";
     }
 
     @PostMapping
     public ModelAndView reg(ModelAndView modelAndView,
-                              @RequestParam(name = "name") String name,
-                              @RequestParam(name = "email") String email,
-                              @RequestParam(name = "age") int age,
-                              @RequestParam(name = "password") String password) {
+                            @ModelAttribute("newUser") User user) {
 
-        if (userService.register(new CalcUser(name, email, age, password))) {
+        if (userService.register(user)) {
             modelAndView.setViewName("redirect:/auth");
         } else {
             modelAndView.setViewName("reg");

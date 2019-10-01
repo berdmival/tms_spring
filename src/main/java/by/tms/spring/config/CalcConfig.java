@@ -1,7 +1,7 @@
-package by.tms.spring.application.web_config;
+package by.tms.spring.config;
 
-import by.tms.spring.application.model.expression.ExpressionRecord;
-import by.tms.spring.application.model.user.User;
+import by.tms.spring.model.ExpressionRecord;
+import by.tms.spring.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
