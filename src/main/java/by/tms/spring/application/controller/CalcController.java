@@ -35,7 +35,7 @@ public class CalcController {
     }
 
     @GetMapping
-    public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView calcShow(ModelAndView modelAndView, HttpSession session) {
 
         modelAndView.setViewName("calc");
 
@@ -51,7 +51,7 @@ public class CalcController {
     }
 
     @PostMapping
-    public ModelAndView index(ModelAndView modelAndView,
+    public ModelAndView calcExpr(ModelAndView modelAndView,
                               HttpSession session,
                               @RequestParam(name = "num1") double num1,
                               @RequestParam(name = "num2") double num2,

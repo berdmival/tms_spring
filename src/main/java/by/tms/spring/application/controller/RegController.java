@@ -25,12 +25,12 @@ public class RegController {
     }
 
     @GetMapping
-    public String index() {
+    public String reg() {
         return "reg";
     }
 
     @PostMapping
-    public ModelAndView index(ModelAndView modelAndView,
+    public ModelAndView reg(ModelAndView modelAndView,
                               @RequestParam(name = "name") String name,
                               @RequestParam(name = "email") String email,
                               @RequestParam(name = "age") int age,

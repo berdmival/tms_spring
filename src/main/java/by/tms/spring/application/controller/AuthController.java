@@ -27,12 +27,12 @@ public class AuthController {
     }
 
     @GetMapping
-    public String index() {
+    public String auth() {
         return "auth";
     }
 
     @PostMapping
-    public ModelAndView index(ModelAndView modelAndView,
+    public ModelAndView auth(ModelAndView modelAndView,
                               //TODO session annotation
                               HttpSession session,
                               @RequestParam(name = "email") String email,
