@@ -13,8 +13,7 @@ public class CalcUserRepository implements UserRepository {
 
     private final List<User> users;
 
-    @Autowired
-    public CalcUserRepository(@Qualifier("users") List<User> users) {
+    public CalcUserRepository(List<User> users) {
         this.users = users;
     }
 

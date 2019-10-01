@@ -3,40 +3,34 @@ package by.tms.spring.controller;
 import by.tms.spring.action.ActionTypeEnum;
 import by.tms.spring.model.ExpressionRecord;
 import by.tms.spring.model.User;
-import by.tms.spring.service.CalcExpressionRecordService;
 import by.tms.spring.service.CalcService;
 import by.tms.spring.service.HistoryService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(path = "/calc")
+@SessionAttributes("user")
 public class CalcController {
 
     private final HistoryService historyService;
     private final CalcService calcService;
-    private final CalcExpressionRecordService calcExpressionRecordService;
 
     public CalcController(HistoryService historyService,
-                          CalcService calcService,
-                          CalcExpressionRecordService calcExpressionRecordService) {
+                          CalcService calcService) {
         this.historyService = historyService;
         this.calcService = calcService;
-        this.calcExpressionRecordService = calcExpressionRecordService;
     }
 
     @GetMapping
-    public ModelAndView calcShow(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView calcShow(ModelAndView modelAndView,
+                                 @ModelAttribute("user") User user
+    ) {
 
         modelAndView.setViewName("calc");
 
-        int userId = ((User) session.getAttribute("user")).getId();
+        int userId = user.getId();
 
         if (historyService.getUserHistory(userId) == null) {
             historyService.createHistoryForUser(userId);
@@ -51,10 +45,10 @@ public class CalcController {
 
     @PostMapping
     public ModelAndView calcExpr(ModelAndView modelAndView,
-                                 HttpSession session,
+                                 @ModelAttribute("user") User user,
                                  @ModelAttribute("expression") ExpressionRecord expression) {
 
-        int userId = ((User) session.getAttribute("user")).getId();
+        int userId = user.getId();
 
         calcService.calculate(expression);
 
