@@ -36,7 +36,7 @@ public class AuthController {
                              //TODO session annotation
                              HttpSession session,
                              @ModelAttribute("authData") AuthData authData
-                             ) {
+    ) {
 
         User user = userService.login(authData);
 

@@ -11,33 +11,33 @@
     <hr size="2" color="black">
 
     <c:forEach items="${onlineUsers}" var="onlineUser">
-                <h2>${onlineUser}:</h2>
-    <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() > 0}">
-        <table border="1">
-            <caption><h2>History:</h2></caption>
-            <tr>
-                <th>Date</th>
-                <th>Number 1</th>
-                <th>Number 2</th>
-                <th>Action</th>
-                <th>Result</th>
-            </tr>
-            <c:forEach items="${historyOfOnlineUsers.get(onlineUser.id)}" var="historyItem">
+        <h2>${onlineUser}:</h2>
+        <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() > 0}">
+            <table border="1">
+                <caption><h2>History:</h2></caption>
                 <tr>
-                    <td>${historyItem.calcDateTime}</td>
-                    <td>${historyItem.num1}</td>
-                    <td>${historyItem.num2}</td>
-                    <td>${historyItem.actionType}</td>
-                    <td>${historyItem.result}</td>
+                    <th>Date</th>
+                    <th>Number 1</th>
+                    <th>Number 2</th>
+                    <th>Action</th>
+                    <th>Result</th>
                 </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-    <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() == 0}">
-        <h2>History is empty</h2>
-    </c:if>
-    <hr size="2" color="black">
-        </c:forEach>
+                <c:forEach items="${historyOfOnlineUsers.get(onlineUser.id)}" var="historyItem">
+                    <tr>
+                        <td>${historyItem.calcDateTime}</td>
+                        <td>${historyItem.num1}</td>
+                        <td>${historyItem.num2}</td>
+                        <td>${historyItem.actionType}</td>
+                        <td>${historyItem.result}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+        <c:if test="${historyOfOnlineUsers.get(onlineUser.id).size() == 0}">
+            <h2>History is empty</h2>
+        </c:if>
+        <hr size="2" color="black">
+    </c:forEach>
 </c:if>
 <c:if test="${sessionScope.user == null}">
     <H1>Please, authorise first</H1>

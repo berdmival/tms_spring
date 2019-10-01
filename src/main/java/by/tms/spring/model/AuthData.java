@@ -6,6 +6,9 @@ public class AuthData implements Serializable {
     private String email;
     private String password;
 
+    public AuthData() {
+    }
+
     public String getEmail() {
         return email;
     }
@@ -20,8 +23,5 @@ public class AuthData implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public AuthData() {
     }
 }

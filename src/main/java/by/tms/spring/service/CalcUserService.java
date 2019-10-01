@@ -56,6 +56,7 @@ public class CalcUserService implements UserService {
         if (user != null && !user.isLogin()) {
             user.login();
             return user;
-        } else return null;    }
+        } else return null;
+    }
 
 }

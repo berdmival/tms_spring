@@ -12,7 +12,7 @@ public enum ActionTypeEnum {
         this.actCode = s;
     }
 
-    public String getActCode(){
+    public String getActCode() {
         return actCode;
     }
 }
