@@ -39,7 +39,7 @@ public class CalcUserService implements UserService {
     }
 
     @Override
-    public User logout(int id) {
+    public User logout(long id) {
         User user = userRepository.findById(id);
         if (user != null) user.logout();
         return user;

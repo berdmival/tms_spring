@@ -3,6 +3,7 @@ package by.tms.spring.model;
 import java.io.Serializable;
 
 public class AuthData implements Serializable {
+    private static final long serialVersionUID = -5790280662084284689L;
     private String email;
     private String password;
 

@@ -30,7 +30,7 @@ public class CalcController {
 
         modelAndView.setViewName("calc");
 
-        int userId = user.getId();
+        long userId = user.getId();
 
         if (historyService.getUserHistory(userId) == null) {
             historyService.createHistoryForUser(userId);
@@ -48,7 +48,7 @@ public class CalcController {
                                  @ModelAttribute("user") User user,
                                  @ModelAttribute("expression") ExpressionRecord expression) {
 
-        int userId = user.getId();
+        long userId = user.getId();
 
         calcService.calculate(expression);
 

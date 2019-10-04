@@ -33,7 +33,7 @@ public class MainController {
         List<User> onlineUsers = userService.findOnlineUsers();
         modelAndView.addObject("onlineUsers", onlineUsers);
 
-        Map<Integer, List<ExpressionRecord>> historyOnlineUsers = new HashMap<>();
+        Map<Long, List<ExpressionRecord>> historyOnlineUsers = new HashMap<>();
         for (User u :
                 onlineUsers) {
             User user = u;

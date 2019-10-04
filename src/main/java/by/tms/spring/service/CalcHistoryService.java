@@ -20,22 +20,22 @@ public class CalcHistoryService implements HistoryService {
     }
 
     @Override
-    public void createHistoryForUser(Integer userId) {
+    public void createHistoryForUser(long userId) {
         historyRepository.createNewHistory(userId);
     }
 
     @Override
-    public void addRecordForUsersHistory(Integer userId, ExpressionRecord record) {
+    public void addRecordForUsersHistory(long userId, ExpressionRecord record) {
         historyRepository.addHistoryRecord(userId, record);
     }
 
     @Override
-    public List<ExpressionRecord> getUserHistory(Integer userId) {
+    public List<ExpressionRecord> getUserHistory(long userId) {
         return historyRepository.getHistoryById(userId);
     }
 
     @Override
-    public Map<Integer, List<ExpressionRecord>> getHistoryForAllUsers() {
+    public Map<Long, List<ExpressionRecord>> getHistoryForAllUsers() {
         return historyRepository.getAllHistory();
     }
 }

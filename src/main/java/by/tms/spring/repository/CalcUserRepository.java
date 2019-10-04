@@ -5,18 +5,22 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Repository("userRepository")
 public class CalcUserRepository implements UserRepository {
 
     private final List<User> users;
+    private AtomicLong lastId;
 
     public CalcUserRepository(List<User> users) {
         this.users = users;
+        this.lastId = new AtomicLong(0);
     }
 
     @Override
     public void add(User user) {
+        user.setId(lastId.addAndGet(1));
         users.add(user);
     }
 
@@ -39,7 +43,7 @@ public class CalcUserRepository implements UserRepository {
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(long id) {
         for (User user : users
         ) {
             if (user.getId() == id) return user;

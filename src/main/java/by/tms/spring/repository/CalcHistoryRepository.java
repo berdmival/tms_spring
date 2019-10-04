@@ -10,29 +10,29 @@ import java.util.Map;
 @Repository("historyRepository")
 public class CalcHistoryRepository implements HistoryRepository {
 
-    private Map<Integer, List<ExpressionRecord>> history;
+    private Map<Long, List<ExpressionRecord>> history;
 
-    public CalcHistoryRepository(Map<Integer, List<ExpressionRecord>> history) {
+    public CalcHistoryRepository(Map<Long, List<ExpressionRecord>> history) {
         this.history = history;
     }
 
     @Override
-    public Map<Integer, List<ExpressionRecord>> getAllHistory() {
+    public Map<Long, List<ExpressionRecord>> getAllHistory() {
         return history;
     }
 
     @Override
-    public void createNewHistory(int userId) {
+    public void createNewHistory(long userId) {
         history.put(userId, new ArrayList<>());
     }
 
     @Override
-    public void addHistoryRecord(int userId, ExpressionRecord record) {
+    public void addHistoryRecord(long userId, ExpressionRecord record) {
         history.get(userId).add(record);
     }
 
     @Override
-    public List<ExpressionRecord> getHistoryById(int userId) {
+    public List<ExpressionRecord> getHistoryById(long userId) {
         return history.get(userId);
     }
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ExpressionRecord implements Serializable {
+    private static final long serialVersionUID = -1640716644237524349L;
     private Double num1;
     private Double num2;
     private ActionTypeEnum actionType;

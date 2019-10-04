@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable {
-    private static int idIncrementer;
-    private int id;
+    private static final long serialVersionUID = 7557510397232050349L;
+    private long id;
     private String name;
     private String email;
     private int age;
@@ -17,7 +17,6 @@ public class User implements Serializable {
 
     public User(String name, String email, int age, String password) {
         this.email = email;
-        this.id = idIncrementer++;
         this.name = name;
         this.age = age;
         this.password = password;
@@ -63,8 +62,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

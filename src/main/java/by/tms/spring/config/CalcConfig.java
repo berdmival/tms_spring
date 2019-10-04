@@ -22,7 +22,7 @@ public class CalcConfig {
     }
 
     @Bean("history")
-    public Map<Integer, List<ExpressionRecord>> history() {
+    public Map<Long, List<ExpressionRecord>> history() {
         return new HashMap<>();
     }
 

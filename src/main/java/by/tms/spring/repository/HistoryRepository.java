@@ -7,12 +7,12 @@ import java.util.Map;
 
 public interface HistoryRepository {
 
-    void createNewHistory(int userId);
+    void createNewHistory(long userId);
 
-    void addHistoryRecord(int userId, ExpressionRecord record);
+    void addHistoryRecord(long userId, ExpressionRecord record);
 
-    List<ExpressionRecord> getHistoryById(int userId);
+    List<ExpressionRecord> getHistoryById(long userId);
 
-    Map<Integer, List<ExpressionRecord>> getAllHistory();
+    Map<Long, List<ExpressionRecord>> getAllHistory();
 
 }

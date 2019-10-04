@@ -12,7 +12,7 @@ public interface UserRepository {
 
     User findByEmailAndPassword(String email, String password);
 
-    User findById(int id);
+    User findById(long id);
 
     List<User> findOnline();
 }
