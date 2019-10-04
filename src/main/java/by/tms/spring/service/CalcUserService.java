@@ -14,8 +14,7 @@ public class CalcUserService implements UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    public CalcUserService(@Qualifier("userRepository") UserRepository userRepository) {
+    public CalcUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

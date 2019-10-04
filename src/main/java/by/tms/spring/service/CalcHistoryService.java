@@ -14,8 +14,7 @@ public class CalcHistoryService implements HistoryService {
 
     private final HistoryRepository historyRepository;
 
-    @Autowired
-    public CalcHistoryService(@Qualifier("historyRepository") HistoryRepository historyRepository) {
+    public CalcHistoryService(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;
     }
 
