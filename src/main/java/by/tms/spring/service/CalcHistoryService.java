@@ -2,8 +2,6 @@ package by.tms.spring.service;
 
 import by.tms.spring.model.ExpressionRecord;
 import by.tms.spring.repository.HistoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,14 +1,22 @@
 package by.tms.spring.model;
 
 import by.tms.spring.action.ActionTypeEnum;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ExpressionRecord implements Serializable {
     private static final long serialVersionUID = -1640716644237524349L;
+
+    @Range(min = -9_223_372_036_854_775_808L, max = 9_223_372_036_854_775_807L)
     private Double num1;
+
+    @Range(min = -9_223_372_036_854_775_808L, max = 9_223_372_036_854_775_807L)
     private Double num2;
+
+    @NotNull
     private ActionTypeEnum actionType;
     private Number result;
     private LocalDateTime calcDateTime;

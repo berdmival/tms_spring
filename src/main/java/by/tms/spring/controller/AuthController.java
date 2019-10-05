@@ -5,6 +5,7 @@ import by.tms.spring.model.User;
 import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,18 +29,23 @@ public class AuthController {
     }
 
     @PostMapping
-    public ModelAndView auth(ModelAndView modelAndView,
-                             @ModelAttribute("authData") AuthData authData
+    public ModelAndView auth(@ModelAttribute("authData") AuthData authData,
+                             BindingResult bindingResult,
+                             ModelAndView modelAndView
     ) {
 
-        User user = userService.login(authData);
-
-        if (user != null) {
-            modelAndView.addObject("user", user);
-            modelAndView.setViewName("redirect:/");
-        } else {
-            modelAndView.addObject("message", INCORRECT);
+        if (bindingResult.hasErrors()) {
             modelAndView.setViewName("auth");
+        } else {
+            User user = userService.login(authData);
+
+            if (user != null) {
+                modelAndView.addObject("user", user);
+                modelAndView.setViewName("redirect:/");
+            } else {
+                modelAndView.addObject("message", INCORRECT);
+                modelAndView.setViewName("auth");
+            }
         }
         return modelAndView;
     }

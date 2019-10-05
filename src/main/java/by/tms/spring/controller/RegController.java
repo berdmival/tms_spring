@@ -4,17 +4,19 @@ import by.tms.spring.model.User;
 import by.tms.spring.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/reg")
 public class RegController {
 
-    private static final String CHECK_YOUR_INPUT_PLEASE_MESSAGE = "User with the same email is already exists!";
+    private static final String USER_WITH_THE_SAME_EMAIL_IS_ALREADY_EXISTS = "User with the same email is already exists!";
 
     private final UserService userService;
 
@@ -29,16 +31,20 @@ public class RegController {
     }
 
     @PostMapping
-    public ModelAndView reg(ModelAndView modelAndView,
-                            @ModelAttribute("newUser") User user) {
-
-        if (userService.register(user)) {
-            modelAndView.setViewName("redirect:/auth");
+    public String reg(@Valid @ModelAttribute("newUser") User user,
+                      BindingResult bindingResult,
+                      Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            return "reg";
         } else {
-            modelAndView.setViewName("reg");
-            modelAndView.addObject("message", CHECK_YOUR_INPUT_PLEASE_MESSAGE);
+            if (userService.register(user)) {
+                return "redirect:/auth";
+            } else {
+                model.addAttribute("message", USER_WITH_THE_SAME_EMAIL_IS_ALREADY_EXISTS);
+                return "reg";
+            }
         }
 
-        return modelAndView;
     }
 }

@@ -3,8 +3,6 @@ package by.tms.spring.service;
 import by.tms.spring.model.AuthData;
 import by.tms.spring.model.User;
 import by.tms.spring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

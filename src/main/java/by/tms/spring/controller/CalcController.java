@@ -6,12 +6,15 @@ import by.tms.spring.model.User;
 import by.tms.spring.service.CalcService;
 import by.tms.spring.service.HistoryService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping(path = "/calc")
-@SessionAttributes("user")
+@SessionAttributes({"user", "possibleActions"})
 public class CalcController {
 
     private final HistoryService historyService;
@@ -44,20 +47,23 @@ public class CalcController {
     }
 
     @PostMapping
-    public ModelAndView calcExpr(ModelAndView modelAndView,
+    public ModelAndView calcExpr(@Valid @ModelAttribute("expression") ExpressionRecord expression,
                                  @ModelAttribute("user") User user,
-                                 @ModelAttribute("expression") ExpressionRecord expression) {
+                                 @ModelAttribute("possibleActions") ActionTypeEnum[] actionTypes,
+                                 BindingResult bindingResult,
+                                 ModelAndView modelAndView
+    ) {
 
         long userId = user.getId();
 
-        calcService.calculate(expression);
+        if (!bindingResult.hasErrors()) {
+            calcService.calculate(expression);
+            historyService.addRecordForUsersHistory(userId, expression);
+            modelAndView.addObject("message", expression.getResult());
+            modelAndView.addObject("expression", new ExpressionRecord());
+        }
 
-        historyService.addRecordForUsersHistory(userId, expression);
-
-        modelAndView.addObject("message", expression.getResult());
         modelAndView.addObject("history", historyService.getUserHistory(userId));
-        modelAndView.addObject("possibleActions", ActionTypeEnum.values());
-        modelAndView.addObject("expression", new ExpressionRecord());
 
         modelAndView.setViewName("calc");
         return modelAndView;

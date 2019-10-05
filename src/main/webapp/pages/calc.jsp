@@ -35,13 +35,19 @@
 <h2>Current result: <c:out value="${requestScope.message}"/></h2>
 
 <spring:form action="/calc" method="post" modelAttribute="expression">
-    <spring:input required="true" autofocus="true" placeholder="num1" type="number" step="any" path="num1"/>
-    <spring:select required="true" path="actionType">
+    <spring:input autofocus="true" placeholder="num1" type="number" step="any" path="num1"/>
+    <spring:errors path="num1"/>
+
+    <spring:select path="actionType">
         <c:forEach items="${possibleActions}" var="actionItem">
             <spring:option value="${actionItem}">${actionItem.actCode}</spring:option>
         </c:forEach>
     </spring:select>
-    <spring:input required="true" placeholder="num2" type="number" name="num2" step="any" path="num2"/>
+    <spring:errors path="actionType"/>
+
+    <spring:input placeholder="num2" type="number" name="num2" step="any" path="num2"/>
+    <spring:errors path="num2"/>
+
     <spring:button>Calculate</spring:button>
 </spring:form>
 <a class="btn" href="${pageContext.request.contextPath}/">Home</a>

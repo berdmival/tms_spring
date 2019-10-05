@@ -1,14 +1,27 @@
 package by.tms.spring.model;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 7557510397232050349L;
     private long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String email;
+
+    @Range(min = 7, max = 65)
     private int age;
+
+    @NotBlank
+    @Size(min = 4, max = 16)
     private String password;
     private boolean isLogin;
 
