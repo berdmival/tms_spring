@@ -3,6 +3,6 @@
 <html>
 <%@include file="/pages/head.jsp" %>
 <body>
-class="err_msg"><c:out value="${message}"/>
+<div class="err_msg"><c:out value="${message}"/></div>
 </body>
 </html>
