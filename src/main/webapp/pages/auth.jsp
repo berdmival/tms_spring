@@ -8,10 +8,10 @@
 <h2 class="err_msg"><c:out value="${message}"/></h2>
 
 <spring:form action="/auth" method="post" modelAttribute="authData">
-    <spring:input autofocus="true" placeholder="Your email" type="email" path="email"/>
+    <spring:input autofocus="true" placeholder="Your email" path="email" type="email"/>
     <spring:errors path="email"/> <br>
 
-    <spring:input placeholder="Your password" type="password" path="password"/>
+    <spring:input placeholder="Your password" path="password" type="password"/>
     <spring:errors path="password"/> <br>
 
     <spring:button>Sign in</spring:button>

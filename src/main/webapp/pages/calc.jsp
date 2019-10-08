@@ -35,7 +35,7 @@
 <h2>Current result: <c:out value="${requestScope.message}"/></h2>
 
 <spring:form action="/calc" method="post" modelAttribute="expression">
-    <spring:input autofocus="true" placeholder="num1" type="number" step="any" path="num1"/>
+    <spring:input autofocus="true" placeholder="num1" path="num1" type="number" step="any"/>
     <spring:errors path="num1"/>
 
     <spring:select path="actionType">
@@ -45,7 +45,7 @@
     </spring:select>
     <spring:errors path="actionType"/>
 
-    <spring:input placeholder="num2" type="number" name="num2" step="any" path="num2"/>
+    <spring:input placeholder="num2" name="num2" path="num2" type="number" step="any"/>
     <spring:errors path="num2"/>
 
     <spring:button>Calculate</spring:button>

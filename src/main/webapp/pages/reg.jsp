@@ -8,16 +8,16 @@
 <h2 class="err_msg"><c:out value="${message}"/></h2>
 
 <spring:form action="/reg" method="post" modelAttribute="newUser">
-    <spring:input path="name"/>
+    <spring:input path="name" autofocus="true" placeholder="Your name"/>
     <spring:errors path="name"/><br>
 
-    <spring:input path="email"/>
+    <spring:input path="email" placeholder="Your email" type="email"/>
     <spring:errors path="email"/><br>
 
-    <spring:input path="age"/>
+    <spring:input path="age" placeholder="Your age" type="number"/>
     <spring:errors path="age"/><br>
 
-    <spring:input path="password"/>
+    <spring:input path="password" placeholder="Your password" type="password"/>
     <spring:errors path="password"/><br>
 
     <spring:button>Sign up</spring:button>

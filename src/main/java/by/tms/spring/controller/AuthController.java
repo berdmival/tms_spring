@@ -1,5 +1,6 @@
 package by.tms.spring.controller;
 
+import by.tms.spring.exeption.CalcException;
 import by.tms.spring.model.AuthData;
 import by.tms.spring.model.User;
 import by.tms.spring.service.UserService;
@@ -32,7 +33,7 @@ public class AuthController {
     public ModelAndView auth(@ModelAttribute("authData") AuthData authData,
                              BindingResult bindingResult,
                              ModelAndView modelAndView
-    ) {
+    ) throws CalcException {
 
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("auth");
@@ -43,8 +44,7 @@ public class AuthController {
                 modelAndView.addObject("user", user);
                 modelAndView.setViewName("redirect:/");
             } else {
-                modelAndView.addObject("message", INCORRECT);
-                modelAndView.setViewName("auth");
+                throw new CalcException(INCORRECT);
             }
         }
         return modelAndView;
