@@ -5,6 +5,7 @@ import by.tms.spring.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan(basePackages = "by.tms.spring")
+@EnableWebMvc
 public class CalcConfig {
 
     @Bean("users")
