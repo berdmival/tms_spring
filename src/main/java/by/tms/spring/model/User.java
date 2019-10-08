@@ -3,6 +3,7 @@ package by.tms.spring.model;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class User implements Serializable {
     private String name;
 
     @NotBlank
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,64}")
     private String email;
 
     @Range(min = 7, max = 65)
@@ -23,6 +25,7 @@ public class User implements Serializable {
     @NotBlank
     @Size(min = 4, max = 16)
     private String password;
+
     private boolean isLogin;
 
     public User() {
